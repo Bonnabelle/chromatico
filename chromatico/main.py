@@ -6,6 +6,14 @@ from handlers import *
 #All handlers are found in the /handlers folder, and all the corresponding templates are there as well.
 #See the base.py file in handlers for more information.
 
+#Temporary, only for hosting on github pages at the moment
+class IndexHandler(base.Utilities):
+    def get(self):
+        t = base.jinja_env.get_template("index.html")
+        response = t.render();
+        self.response.write(response)
+
+
 class HomepageHandler(base.Utilities):
     def get(self):
         if not self.user:
@@ -30,6 +38,7 @@ class ProfileHandler(base.Utilities):
 
 app = base.webapp2.WSGIApplication([
     #General pages
+    ("/", IndexHandler),
     ('/homepage', HomepageHandler),
     ('/signup', authenticationHandlers.SignupHandler),
     ('/login', authenticationHandlers.LoginHandler),
