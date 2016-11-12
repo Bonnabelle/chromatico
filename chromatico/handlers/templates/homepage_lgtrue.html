@@ -1,0 +1,24 @@
+{% extends 'spawn.html' %}
+{% block content %}
+<h5>[Insert more lil icons here]</h5>
+
+<h2>Welcome back, {{username}}!</h2>
+
+    <a href="/logout">
+        <button class="button">Logout</button>
+    </a>
+
+    <a href="/about">
+        <button class="button">About</button>
+    </a>
+    <a href="/resources">
+        <button class="button">Resources</button>
+    </a>
+
+    <a hred="/{{username}}/profile">
+        <button class="button">Profile</button>
+    </a>
+
+    <!--TODO: Make more buttons for options like user quizzes, profile and options.-->
+
+{% endblock %}

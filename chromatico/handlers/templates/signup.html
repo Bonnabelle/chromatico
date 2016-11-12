@@ -1,0 +1,24 @@
+{% extends "spawn.html" %}
+{% block content %}
+
+<h3>Signup Guidelines</h3>
+    <li><h4>Your username and password must be 8-20 characters long with no spaces, punctuation, or special characters.</h4></li>
+    <li><h4>Entering your email is optional, but if you do, please do not include any spaces or invalid email providers. (spam emails, 10 minute mails, etc.)</h4></li>
+
+<form method="post">
+    Username:
+      <input type="text" name="username">{{ errors.ue }}
+    <br>
+    Password:
+      <input type="password" name="password"> {{ errors.pe }}
+    <br>
+    Verify password:
+      <input type="password" name="password_ver"> {{ errors.pve }}
+    <br>
+    Email (optional):
+        <input type="email" name="email"> {{ errors.e_e }}
+    <br>
+    <input type="submit">
+</form>
+
+{% endblock %}

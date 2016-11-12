@@ -1,0 +1,12 @@
+{% extends "spawn.html" %}
+{% block content %}
+<form  method="post">
+    {{error}}
+    <h3>Username:</h3>
+    <input type="text" name="username">
+    <br>
+    <h3>Password:</h3>
+    <input type="password" name="password">
+    <input type="submit">
+</form>
+{% endblock %}
