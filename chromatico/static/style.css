@@ -5,6 +5,10 @@ body {
     /*WORK DANGIT*/
 }
 
+h1 {
+    color : red;
+}
+
 .button {
     color: gray;
 }

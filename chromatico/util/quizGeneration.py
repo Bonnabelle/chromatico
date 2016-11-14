@@ -4,7 +4,6 @@ import random
 #TODO: Make a list that contains either the frequencies of a note or the letter of the note. The frequencies looks cooler and make it harder to hack, harder to cheat.
 #References 440hz version of the chromatic scale, the most used scale in music. A drawback is that it only uses the 0th octave, the lowest frequency on the scale we can hear.
 #However, it is only used for reference. The pitches of the notes vary on the 10 octaves, so they all have the potential to be used.
-#TODO: Make a class(eventually) that holds four types of question generator functions: singular note, chord, 3rds and 5ths.
 #TODO: Make a function that chooses which type of quiz will be generated: audio snippet or play-it-on-the-virtual-piano.
 #TODO: Then make a final function that will randomly select the two functions and return them for later use.
 

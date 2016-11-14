@@ -8,12 +8,11 @@
 
 <form method="post">
     {% for option in options %}
-        <input type="radio" name="option" value={{ option }}>
+        <input type="radio" name="option" value={{ option }}>{{ option }}<br>
     {% endfor %}
     <input type="submit">
 </form>
 
 <p>{{ answer }}</p>
-<p>{{ counter }}</p>
 
 {% endblock %}
