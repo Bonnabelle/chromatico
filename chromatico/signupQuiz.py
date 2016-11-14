@@ -1,6 +1,11 @@
 from base import *
 from util.quizGeneration import *
 
+options = getOption(1) #Gets 4 random notes
+answer = getAnswer(options) #Chooses answer out of above variable
+counter = 0 #Counter to count how many questions they've completed
+
+
 #Signup Quiz
 class SignupQStartHandler(Utilities):
     def get(self):
@@ -18,14 +23,10 @@ class SignupQuizHandler(Utilities):
         self.response.write(response)
 
     def post(self):
-        options = getOption(1) #Gets 4 random notes
-        answer = getAnswer(options) #Chooses answer out of above variable
-        counter = 0 #Counter to count how many questions they've completed
-
-        username = webapp2.request.get("username")
+        username = self.request.get("username")
         current_user = Utilites.get_user_info(username) #Gets user info
         user_stats = Utilites.get_user_stats(current_user)
-        
+
         selected = self.request.get("option") #Gets user selection
         while counter <= 20:
             if selected == answer:
