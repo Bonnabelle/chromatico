@@ -49,6 +49,10 @@ class Utilities(webapp2.RequestHandler):
         else:
             return False
 
+    def get_user_stats(self,user):
+        user_stats = db.GqlQuery("SELECT * FROM UserStats WHERE statistics_owner = '%s'" % user)
+        return user_stats.get()
+
     def login_user(self, user):
         user_id = user.key().id()
         self.set_secure_cookie('user_id', str(user_id))
@@ -72,5 +76,5 @@ class Utilities(webapp2.RequestHandler):
         uid = self.read_secure_cookie('user_id')
         self.user = uid and User.get_by_id(int(uid))
 
-        if not self.request.path in accessable:
+        if not self.user and self.request.path not in accessable:
             self.redirect('/login')

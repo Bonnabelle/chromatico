@@ -1,0 +1,18 @@
+{% extends "spawn.html" %}
+{% block content %}
+
+<p> Identify the note as heard in the audio below. </p>
+    <!--<audio controls>
+        <sound src={{ audio }} type="audio/ogg">
+    </audio>-->
+
+<form method="post">
+    {% for option in options %}
+        <input type="radio" name="option" value={{ option }}>
+    {% endfor %}
+    <input type="submit">
+</form>
+
+<p>{{ answer }}</p>
+
+{% endblock %}
