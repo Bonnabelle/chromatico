@@ -61,9 +61,6 @@ def getOption(level):
 def getAnswer(options):
     return options[random.randrange(0,len(options))]
 
-def createAudioQ():
-    note = getNote()
+def createAudioQ(note):
     pass
-    #TODO: Get a random audio file out of somewhere
-    #TODO: Map the audio file to the correct frequency (key)
-    #TODO: return the mapped audio file, use that in the template
+    #TODO: Get a random audio file out of somewhere from a song, frequency or piano noise, return that link for use in the template

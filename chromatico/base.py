@@ -55,6 +55,8 @@ class Utilities(webapp2.RequestHandler):
 
     def login_user(self, user):
         user_id = user.key().id()
+        visits = 0
+        visits_cookie = self.request.cookies.get('visits', 0)
         self.set_secure_cookie('user_id', str(user_id))
 
     def logout_user(self):

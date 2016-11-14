@@ -50,6 +50,7 @@ class SignupHandler(Utilities):
             user.put()
             user_stats = UserStats(statistics_owner = user, quizzes_complete = 0, percentage_correct = 0.0)
             user_stats.put()
+
             self.login_user(user)
 
             self.redirect('/s-signupq')

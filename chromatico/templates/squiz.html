@@ -6,7 +6,7 @@
         <sound src={{ audio }} type="audio/ogg">
     </audio>-->
 
-<form method="post">
+<form method="post" action="/signupq">
     {% for option in options %}
         <input type="radio" name="option" value={{ option }}>
     {% endfor %}
@@ -14,6 +14,5 @@
 </form>
 
 <p>{{ answer }}</p>
-<p>{{ counter }}</p>
 
 {% endblock %}

@@ -13,12 +13,26 @@ class SignupQStartHandler(Utilities):
 
 class SignupQuizHandler(Utilities):
     def get(self):
+        counter_cookie = self.request.cookies.get('visits')
+
+        counter = int(counter_cookie)
+        #TODO: Make these cookies actually count
+
+        if counter > 20:
+            self.redirect("/homepage") #TODO: This will redirect the user to their new profile with their statistics
+
+        options = getOption(1) #Gets 4 random notes
+        answer = getAnswer(options) #Chooses answer out of above variable
+
+        counter += 1
+
         t = jinja_env.get_template("squiz.html")
-        response = t.render(options=options,answer=answer) #The answer is being shown for testing
+        response = t.render(options=options,answer=answer,counter=counter) #The answer is being shown for testing
         self.response.write(response)
 
-    """def post
-    options = getOption(1) #Gets 4 random notes
-    answer = getAnswer(options) #Chooses answer out of above variable
-"""
-    #TODO: Implement way to randomly generate 20 questions and then take the user to their profile, with all their new statistics
+    def post(self):
+        #submitted = self.request.get("option")
+        #if submitted == answer:
+        #    user_stats.percentage_correct += 1.0
+        self.redirect("/signupq")
+    #TODO: Count how many times the user got the answer right
