@@ -14,3 +14,9 @@ class UserStats(db.Model):
     percentage_correct = db.FloatProperty()
 
 #TODO: Make another model for a user-created quiz
+
+class Quiz(db.Model):
+    total_q = db.IntegerProperty()
+    q_complete = db.IntegerProperty()
+    q_correct = db.IntegerProperty()
+    points_given = db.IntegerProperty()

@@ -127,6 +127,7 @@ app = webapp2.WSGIApplication([
     ('/signup', SignupHandler),
     ('/s-signupq', signupQuiz.SignupQStartHandler),
     ('/signupq', signupQuiz.SignupQuizHandler),
+    ('/results', signupQuiz.resultsHandler),
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
     #User pages

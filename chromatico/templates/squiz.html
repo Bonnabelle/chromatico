@@ -5,14 +5,13 @@
     <!--<audio controls>
         <sound src={{ audio }} type="audio/ogg">
     </audio>-->
-
-<form method="post" action="/signupq">
+<p>{{ correct }}</p>
+<p>{{ answer }}</p>
+<form method="get" action="/signupq">
     {% for option in options %}
-        <input type="radio" name="option" value={{ option }}>
+        <input type="radio" name="option" value={{ option }}>{{ option }}</input>
     {% endfor %}
     <input type="submit">
 </form>
-
-<p>{{ answer }}</p>
 
 {% endblock %}
