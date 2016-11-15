@@ -1,17 +1,19 @@
 {% extends "spawn.html" %}
 {% block content %}
 
-<p> Identify the note as heard in the audio below. </p>
+<p> Identify the note as heard in the audio below.</p>
     <!--<audio controls>
         <sound src={{ audio }} type="audio/ogg">
     </audio>-->
+
 <p>{{ correct }}</p>
-<p>{{ answer }}</p>
-<form method="get" action="/signupq">
-    {% for option in options %}
-        <input type="radio" name="option" value={{ option }}>{{ option }}</input>
-    {% endfor %}
-    <input type="submit">
+<p >{{ answer }}</p>
+<form method="post" action="/signupq">
+    <input type="radio" name="option" value="{{ op1 }}">{{ op1 }}
+    <input type="radio" name="option" value="{{ op2 }}">{{ op2 }}
+    <input type="radio" name="option" value="{{ op3 }}">{{ op3 }}
+    <input type="radio" name="option" value="{{ op4 }}">{{ op4 }}
+<input type="submit">
 </form>
 
 {% endblock %}
