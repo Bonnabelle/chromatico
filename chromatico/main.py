@@ -46,9 +46,9 @@ class SignupHandler(Utilities):
 
         if username != False and pas != False and pas_ver != False and sub_em != False:
             pw_hash = hashutils.make_pw_hash(username, pas)
-            user = User(username=username, uid = 10, pw_hash=pw_hash, taken_assess = False, email = em) #TODO: Implement unique uid
+            user = User(username=username, pw_hash=pw_hash, taken_assess = False, email = em)
             user.put()
-            user_stats = UserStats(statistics_owner = user, quizzes_complete = 0, percentage_correct = 0.0)
+            user_stats = UserStats(statistics_owner = user.username, quizzes_complete = 0, percentage_correct = 0.0, points = 0)
             user_stats.put()
 
             self.login_user(user)
@@ -109,6 +109,7 @@ class LogoutHandler(Utilities):
         response = t.render()
         self.response.write(response)
 
+#TODO: Implement the about page (super easy)
 """class AboutHandler(Utilities):
 
 #Shows references and resources used
@@ -121,16 +122,14 @@ class ProfileHandler(Utilities):
 """
 
 app = webapp2.WSGIApplication([
-    #General pages
     ('/homepage', HomepageHandler),
     ('/resources', ResourcesHandler),
     ('/signup', SignupHandler),
     ('/s-signupq', signupQuiz.SignupQStartHandler),
-    ('/signupq', signupQuiz.SignupQuizHandler),
-    ('/results', signupQuiz.resultsHandler),
+    ('/signupq', signupQuiz.SignupQuizHandler), #Signup quiz handler
+    ('/results', signupQuiz.resultsHandler), #NOTE: Temporary, currently for debugging. Will be user/profile/statistics when finished.
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    #User pages
     #webapp2.Route('/profile/<username:[a-zA-Z0-9_-]{8,20}',ProfileHandler) #TODO: Implement this
 
 ], debug=True)

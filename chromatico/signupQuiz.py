@@ -1,37 +1,52 @@
 from base import *
 from util.quizGeneration import *
-#Signup Quiz
 
+current_user = None
+current_user_stats = None
+
+#Start page before signup quiz
 class SignupQStartHandler(Utilities):
     def get(self):
         t = jinja_env.get_template("squiz-start.html")
-        response = t.render(username_error="",verify_error="")
+        response = t.render(username_error="")
         self.response.write(response)
 
     def post(self):
+        global current_user
+        global current_user_stats
         username = self.request.get("username")
-        username_verify = self.request.get("verify")
-
-        if username == username_verify:
+        user = self.get_user_info(username)
+        if username == "" or user == None:
+            t = jinja_env.get_template("squiz-start.html")
+            response = t.render(username_error="Make sure your username is spelled correctly.")
+            self.response.write(response)
+        else:
+            current_user = user
+            current_user_stats = self.get_user_stats(current_user.username)
             self.redirect('/signupq')
 
-        elif username != username_verify:
-            t = jinja_env.get_template("squiz-start.html")
-            response = t.render(username_error="",verify_error="Your usernames must match in order for you to continue!")
-            self.response.write(response)
-
-#Initializes a new set of options and their answer, a counter to count questions completed and a variable to track correct answers. to be used throughout the quizzes
+#Initializes a new global set of options and their answer, a counter to count questions completed and a variable to track correct answers.
 counter = 0
 correct = 0
 options = None
 answer = None
 
+#Signup quiz
 class SignupQuizHandler(Utilities):
     def get(self):
         global counter
         global options
         global correct
         global answer
+
+        #If they try to access the quiz without permission
+        if self.request.path == "/signupq" and current_user == None:
+            self.redirect("/s-signupq")
+
+        #If they try to retake the quiz
+        elif current_user.taken_assess == True:
+            self.redirect("/homepage")
+
         options = getOption(1)
         answer = getAnswer(options)
         t = jinja_env.get_template("squiz.html")
@@ -39,28 +54,49 @@ class SignupQuizHandler(Utilities):
         self.response.write(response)
 
     def post(self):
+        global current_user
+        global current_user_stats
         global counter
         global answer
         global correct
 
-        if counter <= 19:
+        if counter < 20:
             submitted = self.request.get("option")
-            #self.response.out.write("User submitted: " + submitted + ", and the answer it was compared to was: " + answer)
-            if answer == submitted: #TODO: Fix this- it's not comparing them correctly
+            if answer == submitted:
                 counter += 1
                 correct += 1
                 self.redirect("/signupq")
-            #TODO: Get user from database taking the quiz
-            #TODO: Add these stats after they are at 20 questions
             else:
                 counter += 1
                 self.redirect("/signupq")
         else:
+            current_user.taken_assess = True
+
+            current_user_stats.points += 10
+
+            #Calculate percent
+            percent = float(20/correct)
+            current_user_stats.quizzes_complete += 1
+            current_user_stats.percentage_correct += percent
+
+            #Assign level
+            if correct > 18:
+                current_user.level = 3
+            elif correct < 18 and correct > 11:
+                current_user.level = 2
+            else:
+                current_user.level = 1
+
             self.redirect("/results")
-            
+
 
 
 #For debugging
 class resultsHandler(Utilities):
     def get(self):
-        self.response.out.write("You got " + str(correct) + " out of 20 questions correct. Congratulations!") #TODO: This will redirect the user to their profile page with the results
+        global correct
+        global current_user
+        global current_user_stats
+
+        self.response.out.write("You got " + str(correct) + " out of 20 questions correct. Congratulations! Your level is now: " + str(current_user.level) +
+        " and your total percentage correct is: " + str(current_user_stats.percentage_correct) + ". You're ready to begin training!")

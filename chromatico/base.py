@@ -19,15 +19,12 @@
 
 #Top-level imports
 import webapp2, jinja2, os
-from models import User, UserStats, Quiz
+from models import User, UserStats
 from util import * #Imports the security/misc. utilities needed to authenticate users and hash things.
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
-
-#TODO: Handler for signup then followed  by the quiz, show results, score results in DB, then when the user is ready, redirect to user profile
-#NOTE: This one  ^ and the other quizzes are the hardest to implement.
 
 #TODO: Handler for user profile
 #TODO: Handlers for the final tests for each level.
@@ -50,12 +47,11 @@ class Utilities(webapp2.RequestHandler):
         user = db.GqlQuery("SELECT * FROM User WHERE username = '%s'" % username)
         if user:
             return user.get()
-        else:
-            return False
 
-    def get_user_stats(self,user):
-        user_stats = db.GqlQuery("SELECT * FROM UserStats WHERE statistics_owner = '%s'" % user)
-        return user_stats.get()
+    def get_user_stats(self,username):
+        user_stats = db.GqlQuery("SELECT * FROM UserStats WHERE statistics_owner = '%s'" % username)
+        if user_stats:
+            return user_stats.get()
 
     def login_user(self, user):
         user_id = user.key().id()
@@ -82,7 +78,3 @@ class Utilities(webapp2.RequestHandler):
 
         if not self.user and self.request.path not in accessable:
             self.redirect('/login')
-
-    def getVisitCookie(self):
-        counter_cookie = self.request.cookies.get('visits')
-        return counter_cookie
