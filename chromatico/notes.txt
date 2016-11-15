@@ -72,9 +72,9 @@ CHANGELOG:
     ＊　Finally got the quizzes' counters to start counting, and the user's submissions to actually be recorded to the "correct" variable.
 
 9:04 AM  - 5:18 PM 11/15/2016
-    ＊　Fixed the comparison of the answer variable and what the user submitted in the SignupQuizHandler.
-    ＊　Fixed the global variable problem with the current_user, completed, etc. variables
-    ＊　Simplified some code in the main.py and base.py
-    ＊　Debugged and tested the global variables to ensure working order, everything passed
-    ＊　GQL query for the current user's statistics broke. Need to fix it.  S
-    ＊　Fixed the GQL problem, wasn't declaring some global variables correctly and mispelled some stuff.
+    ＊　Fixed the comparison of the answer variable and what the user submitted in the SignupQuizHandler. 9:04 AM - 12:30 PM
+    ＊　Fixed the global variable problem with the current_user, completed, etc. variables 3:30 PM - 4:24 PM
+    ＊　Simplified some code in the main.py and base.py 4:30-4:42 PM
+    ＊　Debugged and tested the global variables to ensure working order, everything passed 5:00 PM
+    ＊　GQL query for the current user's statistics broke. Need to fix it. 5:18 PM
+    ＊　Fixed the GQL problem, wasn't declaring some global variables correctly and mispelled some stuff. 5:45 PM
