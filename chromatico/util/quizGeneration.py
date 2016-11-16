@@ -63,7 +63,7 @@ def getAnswer(options):
 
 def getAudio(note):
     if note == "C":
-        return "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/util/sounds/C.mp3"
+        return "https://github.com/Bonnabelle/chromatico/blob/master/chromatico/sounds/261.wav"
     else:
         return ""
 
