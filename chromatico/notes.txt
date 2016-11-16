@@ -10,8 +10,6 @@ problematic. The signup quiz question generation works pretty well, however it d
 5. A homepage different for a logged in user and a logged out user.
 6. A resources page with references to what was used in the making of Chromatico.
 
-Read about submitting to CSV file for Python
-
 What the program will do:
 1. The logged in user has access to their profile which has options, progress and comment functions. (Like a diary of sorts.)
 2. Once the current quiz in the database's total questions has been answered, the user will be redirected to their profile, and the results of the quiz will be pushed

@@ -1,9 +1,6 @@
 from base import *
 from util.quizGeneration import *
 
-current_user = None
-current_user_stats = None
-
 #Start page before signup quiz
 class SignupQStartHandler(Utilities):
     def get(self):
@@ -22,7 +19,7 @@ class SignupQStartHandler(Utilities):
             response = t.render(username_error="Make sure your username is spelled correctly.")
             self.response.write(response)
         else:
-            current_user = self.user
+            current_user = user
             current_user_stats = self.get_user_stats(current_user.username)
             self.redirect('/signupq')
 
@@ -76,7 +73,7 @@ class SignupQuizHandler(Utilities):
             current_user_stats.points += 10
 
             #Calculate percent
-            if correct > 2:
+            if correct > 1:
                 percent = float(20/correct)
             else:
                 percent = 1.0
@@ -95,13 +92,12 @@ class SignupQuizHandler(Utilities):
 
 
 
-#For debugging
-class ProfileHandler(Utilities):
-    def get(self,username=""):
+"""class ProfileHandler(Utilities):
+    def get(self,username = current_user.username):
         global correct
         global current_user
         global current_user_stats
 
-        t = jinja_env.get_template("profile.html")
-        response = t.render(user=current_user, user_stats=current_user_stats)
-        self.response.write(response)
+        self.response.out.write("You got " + str(correct) + " out of 20 questions correct. Congratulations! Your level is now: " + str(current_user.level) +
+        " and your total percentage correct is: " + str(current_user_stats.percentage_correct) + ". You're ready to begin training!")
+"""

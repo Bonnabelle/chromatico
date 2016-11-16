@@ -25,6 +25,7 @@ from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
+
 #TODO: Handlers for the final tests for each level.
 
 #NOTE: Equally as hard. Maybe use a module? v
@@ -38,6 +39,8 @@ accessable = [
 ]
 
 errors = {}
+current_user = None
+current_user_stats = None
 
 
 class Utilities(webapp2.RequestHandler):
@@ -69,10 +72,13 @@ class Utilities(webapp2.RequestHandler):
         self.response.headers.add_header('Set-Cookie', '%s=%s; Path=/' % (name, cookie_val))
 
     def initialize(self, *a, **kw):
+        global current_user
+        global current_user_stats
         #Limits where a user can go if they're not logged in, based on the accessable paths specified below.
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
-        self.user = uid and User.get_by_id(int(uid))
+        current_user = uid and User.get_by_id(int(uid))
+        current_user_stats = self.get_user_stats(current_user.username)
 
-        if not self.user and self.request.path not in accessable:
+        if not current_user and self.request.path not in accessable:
             self.redirect('/login')
