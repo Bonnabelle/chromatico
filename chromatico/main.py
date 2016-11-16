@@ -121,6 +121,6 @@ app = webapp2.WSGIApplication([
     ('/signupq', Quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
+    webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
 
 ], debug=True)

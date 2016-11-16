@@ -73,9 +73,12 @@ class Utilities(webapp2.RequestHandler):
         #Limits where a user can go if they're not logged in, based on the accessable paths specified below.
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
+        #Instance variables
         self.current_user = uid and User.get_by_id(int(uid))
-        cu = self.current_user
-        self.current_user_stats = self.get_user_stats(cu.username)
+        if type(self.current_user) != unicode:
+            self.current_user_stats = self.get_user_stats(self.current_user.username)
+        else:
+            self.current_user_stats = None
 
         if not self.current_user and self.request.path not in accessable:
             self.redirect('/login')
