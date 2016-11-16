@@ -44,9 +44,9 @@ class SignupQuizHandler(Utilities):
 
         options = getOption(1)
         answer = getAnswer(options)
-        #audio = getAudio(answer)
+        audio = getAudio(answer)
         t = jinja_env.get_template("squiz.html")
-        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,correct=correct)#audio=audio)
+        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,correct=correct,audio=audio)
         self.response.write(response)
 
     def post(self):
@@ -73,7 +73,7 @@ class SignupQuizHandler(Utilities):
 class ResultsHandler(Utilities):
     def get(self):
         global correct
-        
+
          #TODO: fix this - none of the below attribute changes are working
         self.current_user_stats.points += 10
 

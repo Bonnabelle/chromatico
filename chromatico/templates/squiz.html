@@ -4,8 +4,8 @@
 <p>Question {{ counter }}.</p>
 <p> Identify the note as heard in the audio below.</p>
     <audio controls>
-        <source src="http://users.skynet.be/fa046054/home/P22/track53.mp3" type="audio/mp3">
-            There was an error producing audio. Sorry.
+        <source src="{{ audio }}" type="audio/wav">
+            There was an error loading the audio.
     </audio>
 
 <p>{{ correct }}</p>
