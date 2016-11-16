@@ -1,4 +1,4 @@
-A collection of unused but possibly useful code that was removed from the project, as well as a sort of changeLog reference for the admin. (Me)
+A reference sheet for the developer (Me)
 
 What the whole program does currently:
 1. User signup functions with authentication

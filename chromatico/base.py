@@ -25,8 +25,6 @@ from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
-
-#TODO: Handler for user profile
 #TODO: Handlers for the final tests for each level.
 
 #NOTE: Equally as hard. Maybe use a module? v

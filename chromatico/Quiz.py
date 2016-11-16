@@ -14,6 +14,7 @@ class SignupQStartHandler(Utilities):
     def post(self):
         global current_user
         global current_user_stats
+
         username = self.request.get("username")
         user = self.get_user_info(username)
         if username == "" or user == None:
@@ -21,7 +22,7 @@ class SignupQStartHandler(Utilities):
             response = t.render(username_error="Make sure your username is spelled correctly.")
             self.response.write(response)
         else:
-            current_user = user
+            current_user = self.user
             current_user_stats = self.get_user_stats(current_user.username)
             self.redirect('/signupq')
 
@@ -50,7 +51,7 @@ class SignupQuizHandler(Utilities):
         options = getOption(1)
         answer = getAnswer(options)
         t = jinja_env.get_template("squiz.html")
-        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,correct=correct)
+        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,correct=correct,audio="")
         self.response.write(response)
 
     def post(self):
@@ -75,7 +76,10 @@ class SignupQuizHandler(Utilities):
             current_user_stats.points += 10
 
             #Calculate percent
-            percent = float(20/correct)
+            if correct > 2:
+                percent = float(20/correct)
+            else:
+                percent = 1.0
             current_user_stats.quizzes_complete += 1
             current_user_stats.percentage_correct += percent
 
@@ -87,16 +91,17 @@ class SignupQuizHandler(Utilities):
             else:
                 current_user.level = 1
 
-            self.redirect("/results")
+            self.redirect("/%s/profile" % current_user.username)
 
 
 
 #For debugging
-class resultsHandler(Utilities):
-    def get(self):
+class ProfileHandler(Utilities):
+    def get(self,username=""):
         global correct
         global current_user
         global current_user_stats
 
-        self.response.out.write("You got " + str(correct) + " out of 20 questions correct. Congratulations! Your level is now: " + str(current_user.level) +
-        " and your total percentage correct is: " + str(current_user_stats.percentage_correct) + ". You're ready to begin training!")
+        t = jinja_env.get_template("profile.html")
+        response = t.render(user=current_user, user_stats=current_user_stats)
+        self.response.write(response)

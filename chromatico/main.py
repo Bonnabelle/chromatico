@@ -1,5 +1,5 @@
 from base import *
-import signupQuiz
+import Quiz
 
 #TODO's found in handlers/base.py :)
 #NOTE: This class contains all the routes and runs the web app, and contains most of the handlers available to the public.
@@ -111,25 +111,16 @@ class LogoutHandler(Utilities):
 
 #TODO: Implement the about page (super easy)
 """class AboutHandler(Utilities):
-
-#Shows references and resources used
-class ResourceHandler(Utilities):
-
-class ProfileHandler(Utilities):
-    def get(self):
-        t = jinja_
-
 """
 
 app = webapp2.WSGIApplication([
     ('/homepage', HomepageHandler),
     ('/resources', ResourcesHandler),
     ('/signup', SignupHandler),
-    ('/s-signupq', signupQuiz.SignupQStartHandler),
-    ('/signupq', signupQuiz.SignupQuizHandler), #Signup quiz handler
-    ('/results', signupQuiz.resultsHandler), #NOTE: Temporary, currently for debugging. Will be user/profile/statistics when finished.
+    ('/s-signupq', Quiz.SignupQStartHandler),
+    ('/signupq', Quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    #webapp2.Route('/profile/<username:[a-zA-Z0-9_-]{8,20}',ProfileHandler) #TODO: Implement this
+    webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
 
 ], debug=True)
