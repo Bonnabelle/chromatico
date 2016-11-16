@@ -75,10 +75,9 @@ class Utilities(webapp2.RequestHandler):
         uid = self.read_secure_cookie('user_id')
         #Instance variables
         self.current_user = uid and User.get_by_id(int(uid))
-        if type(self.current_user) != unicode:
+        if self.current_user:
             self.current_user_stats = self.get_user_stats(self.current_user.username)
-        else:
-            self.current_user_stats = None
+
 
         if not self.current_user and self.request.path not in accessable:
             self.redirect('/login')

@@ -1,5 +1,5 @@
 #A set of useful tools for quiz generation
-import random
+import random, os, sys
 
 #TODO: Make a list that contains either the frequencies of a note or the letter of the note. The frequencies looks cooler and make it harder to hack, harder to cheat.
 #References 440hz version of the chromatic scale, the most used scale in music. A drawback is that it only uses the 0th octave, the lowest frequency on the scale we can hear.
@@ -61,6 +61,11 @@ def getOption(level):
 def getAnswer(options):
     return options[random.randrange(0,len(options))]
 
-def createAudioQ(note):
-    pass
+def getAudio(note):
+    if note == "C":
+        return "sounds/C.mp3"
+    else:
+        return ""
+
+
     #TODO: Get a random audio file out of somewhere from a song, frequency or piano noise, return that link for use in the template

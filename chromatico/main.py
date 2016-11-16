@@ -13,11 +13,11 @@ class HomepageHandler(Utilities):
     def get(self):
         if not self.current_user:
             t = jinja_env.get_template("homepage_lgfalse.html")
-            response = t.render()
+            response = t.render(current_user=self.current_user)
             self.response.write(response)
         else:
             t = jinja_env.get_template("homepage_lgtrue.html")
-            response = t.render(username = self.current_user.username)
+            response = t.render(username = self.current_user.username, stats = self.get_user_stats(self.current_user.username))
             self.response.write(response)
 #Resources
 class ResourcesHandler(Utilities):
@@ -46,7 +46,7 @@ class SignupHandler(Utilities):
 
         if username != False and pas != False and pas_ver != False and sub_em != False:
             pw_hash = hashutils.make_pw_hash(username, pas)
-            user = User(username=username, pw_hash=pw_hash, taken_assess = False, email = em)
+            user = User(username=username, pw_hash=pw_hash, taken_assess = False, email = em, level = 1)
             user.put()
             user_stats = UserStats(statistics_owner = user.username, quizzes_complete = 0, percentage_correct = 0.0, points = 0)
             user_stats.put()
@@ -121,6 +121,7 @@ app = webapp2.WSGIApplication([
     ('/signupq', Quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
+    ('/results', Quiz.ResultsHandler)
+    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
 
 ], debug=True)
