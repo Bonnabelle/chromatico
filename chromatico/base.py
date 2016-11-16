@@ -39,8 +39,6 @@ accessable = [
 ]
 
 errors = {}
-current_user = None
-current_user_stats = None
 
 
 class Utilities(webapp2.RequestHandler):
@@ -72,13 +70,12 @@ class Utilities(webapp2.RequestHandler):
         self.response.headers.add_header('Set-Cookie', '%s=%s; Path=/' % (name, cookie_val))
 
     def initialize(self, *a, **kw):
-        global current_user
-        global current_user_stats
         #Limits where a user can go if they're not logged in, based on the accessable paths specified below.
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
-        current_user = uid and User.get_by_id(int(uid))
-        current_user_stats = self.get_user_stats(current_user.username)
+        self.current_user = uid and User.get_by_id(int(uid))
+        cu = self.current_user
+        self.current_user_stats = self.get_user_stats(cu.username)
 
-        if not current_user and self.request.path not in accessable:
+        if not self.current_user and self.request.path not in accessable:
             self.redirect('/login')

@@ -11,16 +11,14 @@ import Quiz
 #Homepage
 class HomepageHandler(Utilities):
     def get(self):
-        self.response.out.write("Current user isn't working, its returning: " + str(current_user))
-        """
-        if not current_user:
+        if not self.current_user:
             t = jinja_env.get_template("homepage_lgfalse.html")
             response = t.render()
             self.response.write(response)
         else:
             t = jinja_env.get_template("homepage_lgtrue.html")
-            response = t.render(username = current_user.username)
-            self.response.write(response)"""
+            response = t.render(username = self.current_user.username)
+            self.response.write(response)
 #Resources
 class ResourcesHandler(Utilities):
     def get(self):
