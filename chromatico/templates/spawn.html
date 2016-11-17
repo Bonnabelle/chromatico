@@ -12,8 +12,6 @@
                 <br>
                 <a href="/profile"><strike>Profile</strike></a>
                 <br>
-                <a href="/about">About</a>
-                <br>
                 <a href="/resources">Resources</a>
                 <br>
                 <a href="/logout">Logout</a>
@@ -34,10 +32,13 @@
                     document.getElementById("main").style.marginLeft= "0";
                 }
             </script>
-            <div id="main">
-                {% block content %}
-                {% endblock %}
-                <button id="navBtn" onclick="openNav()">Open Menu</button>
-            </div>
         </body>
+        <div id="main">
+            {% block content %}
+            {% endblock %}
+            <button id="navBtn" onclick="openNav()">Open Menu</button>
+        </div>
+        <script type="text/javascript">
+            openNav();
+        </script>
 </html>

@@ -65,6 +65,7 @@
     padding: 0px 0px 0px 0px;
 }
 
+
 .FrontPage .Top {
     transition: 0.5s;
     text-align: center;
@@ -95,4 +96,8 @@
 .FrontPage .Enter:hover {
     transition: 2s;
     opacity: 100;
+}
+
+.FrontPage p {
+    text-indent: 25px;
 }
