@@ -85,7 +85,3 @@ def getAudio(note):
         return all_freq.get(note)
     else:
         return ""
-
-
-
-    #TODO: Get a random audio file out of somewhere from a song, frequency or piano noise, return that link for use in the template

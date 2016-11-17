@@ -79,9 +79,9 @@ class ResultsHandler(Utilities):
 
         #Calculate percent
         if correct > 1:
-            percent = float(20/correct) * 10.0
+            percent = float(100 * correct)  / 20
         else:
-            percent = 1.0
+            percent = 0.0
         self.current_user_stats.quizzes_complete += 1
         self.current_user_stats.percentage_correct += percent
 
@@ -93,4 +93,4 @@ class ResultsHandler(Utilities):
         else:
             self.current_user.level = 1
         self.response.out.write("You got " + str(correct) + " out of 20 questions correct. Congratulations! Your level is now: " + str(self.current_user.level) +
-        " and your total percentage correct is: " + str(self.current_user_stats.percentage_correct) + ". You're ready to begin training!")
+        " and your total percentage correct is: " + str(self.current_user_stats.percentage_correct) + "%. You're ready to begin training!")

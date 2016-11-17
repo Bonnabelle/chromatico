@@ -1,13 +1,73 @@
-body {
-    background-color: white;
-
-    /*WORK DANGIT*/
+* {
+    padding-top: 0px;
+    margin-top: 0px;
+    vertical-align: baseline;
 }
 
-h1 {
-    color : red;
+.Menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+
+}
+/* Menu's link styles*/
+.Menu a {
+    transition: 0.2s;
+    text-align: center;
+    padding: 4px 85px 4px;
+    text-decoration: none;
+    font-size: 24px;
+}
+.Menu a:visited {
+    color: #8B8B8B;
 }
 
-.button {
-    color: gray;
+.Menu a:active {
+    color: #8B8B8B;
+}
+
+.Menu a:link {
+    color: #8B8B8B;
+}
+
+.Menu .clsB {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.Menu a:hover {
+    padding: 8px 8px 8px 90px;
+    transition: 0.2s;
+    color: white;
+    text-decoration: none;
+}
+
+/* Block content */
+#main {
+    transition: margin-left 0.5s;
+
+}
+
+#navBtn {
+    padding: 0px 0px 0px 0px;
+}
+
+.FrontPage .Top {
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    background-color: #CAE8B7;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    padding-top: 60px;
 }
