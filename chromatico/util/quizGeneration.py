@@ -9,9 +9,16 @@ import random
 
 all_freq = {"C" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/261.mp3",
             "C#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/277.mp3",
-            18.354 : "D", 19.445 : "D#",
-            20.602 : "E", 21.827 : "F", 23.125 : "F#", 24.500 : "G",
-            25.957 : "G#",  27.500 : "A",  29.135 : "A#",  30.868 : "B"}
+            "D" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/293.mp3",
+            "D#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/311.mp3",
+            "E" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/329.mp3",
+            "F" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/349.mp3",
+            "F#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/369.mp3",
+            "G" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/392.mp3",
+            "G#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/415.mp3",
+            "A" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/440.mp3",
+            "A#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/466.mp3",
+            "B" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/493.mp3"}
 
 major_freq = {16.352 : "C", 18.354 : "D", 20.602 : "E", 21.827 : "F", 24.500 : "G", 27.500 : "A", 30.868 : "B"}
 
@@ -64,10 +71,10 @@ def getAnswer(options):
     return options[random.randrange(0,len(options))]
 
 def getAudio(note):
-    if note == "C":
+    if all_freq.has_key(note):
         return all_freq.get(note)
-    elif note == "C#":
-        return "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/277.mp3"
+    else:
+        return ""
 
 
 
