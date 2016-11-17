@@ -7,7 +7,9 @@ import random
 #TODO: Make a function that chooses which type of quiz will be generated: audio snippet or play-it-on-the-virtual-piano.
 #TODO: Then make a final function that will randomly select the two functions and return them for later use.
 
-all_freq = {16.352 : "C", 17.324 : "C#", 18.354 : "D", 19.445 : "D#",
+all_freq = {"C" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/261.mp3",
+            "C#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/277.mp3",
+            18.354 : "D", 19.445 : "D#",
             20.602 : "E", 21.827 : "F", 23.125 : "F#", 24.500 : "G",
             25.957 : "G#",  27.500 : "A",  29.135 : "A#",  30.868 : "B"}
 
@@ -17,9 +19,9 @@ major_freq = {16.352 : "C", 18.354 : "D", 20.602 : "E", 21.827 : "F", 24.500 : "
 minor_freq = {17.324 : "C#", 19.445 : "D#", 23.125 : "F#", 25.957 : "G#",  29.135 : "A#"}
 
 #All the values of the frequencies
-all_f_ls = ls = list(all_freq.values())
-major_f_ls = ls = list(major_freq.values())
-minor_f_ls = list(minor_freq.values())
+all_f_ls = ls = list(all_freq.keys())
+major_f_ls = ls = list(major_freq.keys())
+minor_f_ls = list(minor_freq.keys())
 
 #List to choose random frequencies from
 chooser = [all_f_ls,major_f_ls,minor_f_ls]
@@ -63,9 +65,10 @@ def getAnswer(options):
 
 def getAudio(note):
     if note == "C":
-        return "https://github.com/Bonnabelle/chromatico/blob/master/chromatico/sounds/261.wav"
-    else:
-        return ""
+        return all_freq.get(note)
+    elif note == "C#":
+        return "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/277.mp3"
+
 
 
     #TODO: Get a random audio file out of somewhere from a song, frequency or piano noise, return that link for use in the template
