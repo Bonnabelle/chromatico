@@ -8,6 +8,13 @@ import Quiz
 #See the base.py file in handlers for more information.
 
 
+#Index (Aka Startpage)
+class IndexHandler(Utilities):
+    def get(self):
+        t = jinja_env.get_template("index.html")
+        response = t.render()
+        self.response.write(response)
+
 #Homepage
 class HomepageHandler(Utilities):
     def get(self):
@@ -114,6 +121,7 @@ class LogoutHandler(Utilities):
 """
 
 app = webapp2.WSGIApplication([
+    ('/',IndexHandler),
     ('/homepage', HomepageHandler),
     ('/resources', ResourcesHandler),
     ('/signup', SignupHandler),

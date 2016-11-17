@@ -35,7 +35,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), a
 #TODO: Handler for user quiz/training.
 
 accessable = [
-    '/homepage','/about','/resources','/login','/signup'
+    '/','/homepage','/about','/resources','/login','/signup'
 ]
 
 errors = {}

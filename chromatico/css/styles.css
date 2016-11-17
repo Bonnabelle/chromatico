@@ -2,6 +2,7 @@
     padding-top: 0px;
     margin-top: 0px;
     vertical-align: baseline;
+    text-decoration: none;
 }
 
 .Menu {
@@ -17,6 +18,9 @@
     padding-top: 30px;
 
 }
+.Menu:hover {
+    background-color: #98C57C;
+}
 /* Menu's link styles*/
 .Menu a {
     transition: 0.2s;
@@ -26,15 +30,15 @@
     font-size: 24px;
 }
 .Menu a:visited {
-    color: #8B8B8B;
+    color: #66A93E;
 }
 
 .Menu a:active {
-    color: #8B8B8B;
+    color: white;
 }
 
 .Menu a:link {
-    color: #8B8B8B;
+    color: #66A93E;
 }
 
 .Menu .clsB {
@@ -62,6 +66,7 @@
 }
 
 .FrontPage .Top {
+    transition: 0.5s;
     text-align: center;
     color: white;
     font-size: 40px;
@@ -70,4 +75,24 @@
     padding-bottom: 50px;
     padding-left: 80px;
     padding-top: 60px;
+}
+
+.FrontPage .Top:hover {
+    transition: 0.5s;
+    background-color: #98C57C;
+}
+
+.FrontPage .Enter {
+    height: 750px;
+    width: 600px;
+    transition: 0.5s;
+    align-self: center;
+    padding-left: 400px;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.FrontPage .Enter:hover {
+    transition: 2s;
+    opacity: 100;
 }
