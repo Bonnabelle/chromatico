@@ -1,10 +1,30 @@
-* {
+html,head,body {
     padding-top: 0px;
     margin-top: 0px;
     vertical-align: baseline;
     text-decoration: none;
 }
+.error {
+    color: red;
+}
 
+.no-access {
+    opacity: .8;
+    cursor: not-allowed;
+}
+
+.button {
+    background-color: #808080;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition: 0.4s;
+    cursor: pointer;
+}
 .Menu {
     height: 100%;
     width: 0;
@@ -57,16 +77,35 @@
 
 /* Block content */
 #main {
+    margin-top: 0px;
     transition: margin-left 0.5s;
 
 }
 
-#navBtn {
-    padding: 0px 0px 0px 0px;
+
+.FrontPage {
+    text-align: justify;
 }
 
+.FrontPage a{
+    transition: .2s;
+    text-decoration: none;
+    color: gray;
+}
 
+.FrontPage a:visited {
+    text-decoration: none;
+
+}
+
+.FrontPage a:hover {
+    transition: .2s;
+    color: #474545;
+    text-decoration: none;
+}
 .FrontPage .Top {
+    font-family: 'Lato',serif;
+    margin-top: 0px;
     transition: 0.5s;
     text-align: center;
     color: white;

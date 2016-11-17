@@ -56,6 +56,11 @@ class SignupQuizHandler(Utilities):
 
         if counter < 20:
             submitted = self.request.get("option")
+
+            if submitted == "":
+                counter -= 1
+                self.redirect("/signupq")
+
             if answer == submitted:
                 counter += 1
                 correct += 1

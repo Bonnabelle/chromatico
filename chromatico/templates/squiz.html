@@ -8,15 +8,20 @@
             There was an error loading the audio.
     </audio>
 
-<p>{{ correct }}</p>
-<p >{{ answer }}</p>
+<!--<p>{{ correct }}</p>
+<p >{{ answer }}</p>-->
 <form method="post" action="/signupq">
     <input type="radio" name="option" value="{{ op1 }}">{{ op1 }}
+    <br>
     <input type="radio" name="option" value="{{ op2 }}">{{ op2 }}
+    <br>
     <input type="radio" name="option" value="{{ op3 }}">{{ op3 }}
+    <br>
     <input type="radio" name="option" value="{{ op4 }}">{{ op4 }}
+    <br>
 <input type="submit">
 </form>
+<br>
 
 
 {% endblock %}

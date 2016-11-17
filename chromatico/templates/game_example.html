@@ -2,8 +2,27 @@
 {% block content %}
 
 <h1>Game example</h1>
-<div>
-<script src="http://cdn.htmlgames.com/embed.js?game=DailyBinario&amp;width=800&amp;height=480&amp;bgcolor=white"></script>
+    <p>After a user reaches a certain level, they are redirected to this page for some fun times! Every level unlocks a new game.
+        Currently games are coming from this <a href="http://www.embeddablegames.net">lovely website</a>.</p>
+<br>
+<div align="center">
+    <object width="640" height="480">
+        <param name="movie" value="http://www.embeddablegames.net/embedgames/superflashmariobros.swf">
+        <param name="quality" value="high"><embed src="http://www.embeddablegames.net/embedgames/superflashmariobros.swf" quality="high" width="640" height="400" type="application/x-shockwave-flash" pluginspage= "http://www.macromedia.com/go/getflashplayer">
+        </embed>
+    </object>
 </div>
+
+<h1>Piano Example</h1>
+    <p>I am currently in the early stages of development with a virtual piano of my own, but in the end it will function similar to the one below.</p>
+<div alig="center">
+    <object width="1000" height="250"><param name="movie" value="http://www.buttonbass.com/images/PianoEditor.swf"><param name="wmode" value="transparent">
+        <embed src="http://www.buttonbass.com/images/PianoEditor.swf" type="application/x-shockwave-flash" wmode="transparent" width="1000" height="250">
+    </embed>
+    </object>
+</div>
+<br>
+<p>This piano comes from <a href="http://www.buttonbass.com">buttonbass.com</a>.</p>
+
 
 {% endblock %}

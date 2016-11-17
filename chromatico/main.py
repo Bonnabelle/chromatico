@@ -120,6 +120,12 @@ class LogoutHandler(Utilities):
 """class AboutHandler(Utilities):
 """
 
+class GameHandler(Utilities):
+    def get(self):
+        t = jinja_env.get_template("game_example.html")
+        response = t.render()
+        self.response.write(response)
+
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/homepage', HomepageHandler),
@@ -129,7 +135,9 @@ app = webapp2.WSGIApplication([
     ('/signupq', Quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    ('/results', Quiz.ResultsHandler)
+    ('/results', Quiz.ResultsHandler),
+    ('/game-demo', GameHandler),
+    #('/profile', Quiz.ProfileHandler)
     #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
 
 ], debug=True)
