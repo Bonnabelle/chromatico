@@ -24,7 +24,7 @@ class HomepageHandler(Utilities):
             self.response.write(response)
         else:
             t = jinja_env.get_template("homepage_lgtrue.html")
-            response = t.render(username = self.current_user.username, stats = self.get_user_stats(self.current_user.username))
+            response = t.render(current_user = self.current_user, stats = self.get_user_stats(self.current_user.username))
             self.response.write(response)
 #Resources
 class ResourcesHandler(Utilities):

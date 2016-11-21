@@ -1,0 +1,11 @@
+{% extends "spawn.html" %}
+{% block content %}
+
+<p>{{current_user.taken_assess}} You got {{ correct }} out of 20 questions correct. Congratulations! Your level is now {{ current_user.level }} and your total
+    percentage correct is {{ current_user.percentage_correct }}%. You're ready to begin training!</p>
+<br>
+<a href="/homepage">
+    <button class="button">Home</button>
+</a>
+
+{% endblock %}

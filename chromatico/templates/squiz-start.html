@@ -3,12 +3,9 @@
 <h1> Signup Quiz </h1>
     <h3>Thanks for signing up! Before you can begin training, we must assess your skils. This is a 20 question test that will evaluate your skills of tonal processing.</h3>
     <h4> If you exit the quiz without finishing it, your level will remain at 0 and that's not exactly ideal. Please, don't leave th test until you finih!</h4>
-    <h4>Enter your username to begin.</h4>
+    <h4>Click the button below to begin.</h4>
     <br>
-    <form action="/s-signupq" method="post">
-        Enter username
-        <input type="text" name="username">{{ username_error }}
-        <br>
-        <input type="submit">
-    </form>
+    <a href="/signupq">
+        <button class="button">Begin</button>
+    </a>
 {% endblock %}

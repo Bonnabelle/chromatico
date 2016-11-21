@@ -28,8 +28,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), a
 
 #TODO: Handlers for the final tests for each level.
 
-#NOTE: Equally as hard. Maybe use a module? v
-#TODO: Once someone reaches level 4, they have access to make quizzes of their own with songs and snippets, etc. A kind of quiz building tool.
+#TODO: Once someone reaches level 4, they have access to the number/note fusion tool, allowing them to input numbers and there would be a mp3 audio output that mashed them all together according to 4/4 comon time
 
 #NOTE: Should be a large page and then you can choose which one you want to go to. Kind of like the all posts implementation in blogz. (Python version)
 #TODO: Handler for user quiz/training.
@@ -73,7 +72,6 @@ class Utilities(webapp2.RequestHandler):
         #Limits where a user can go if they're not logged in, based on the accessable paths specified below.
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
-        #Instance variables
         self.current_user = uid and User.get_by_id(int(uid))
         if self.current_user:
             self.current_user_stats = self.get_user_stats(self.current_user.username)

@@ -7,16 +7,16 @@
 
 <form method="post">
     Username:
-      <input type="text" name="username">{{ errors.ue }}
+      <input type="text" name="username"> <p class="error">{{ errors.ue }}</p>
     <br>
     Password:
-      <input type="password" name="password"> {{ errors.pe }}
+      <input type="password" name="password"> <p class="error">{{ errors.pe }}</p>
     <br>
     Verify password:
-      <input type="password" name="password_ver"> {{ errors.pve }}
+      <input type="password" name="password_ver"> <p class="error">{{ errors.pve }}</p>
     <br>
     Email (optional):
-        <input type="email" name="email"> {{ errors.e_e }}
+        <input type="email" name="email"> <p class="error">{{ errors.e_e }}</p>
     <br>
     <input type="submit">
 </form>

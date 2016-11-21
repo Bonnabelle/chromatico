@@ -5,20 +5,8 @@ from util.quizGeneration import *
 class SignupQStartHandler(Utilities):
     def get(self):
         t = jinja_env.get_template("squiz-start.html")
-        response = t.render(username_error="")
+        response = t.render()
         self.response.write(response)
-
-    def post(self):
-        username = self.request.get("username")
-        user = self.get_user_info(username)
-        if username == "" or user == None:
-            t = jinja_env.get_template("squiz-start.html")
-            response = t.render(username_error="Make sure your username is spelled correctly.")
-            self.response.write(response)
-        else:
-            self.current_user = user
-            self.current_user_stats = self.get_user_stats(self.current_user.username)
-            self.redirect('/signupq')
 
 #Initializes a new global set of options and their answer, a counter to count questions completed and a variable to track correct answers.
 counter = 1
@@ -34,12 +22,8 @@ class SignupQuizHandler(Utilities):
         global correct
         global answer
 
-        #If they try to access the quiz without permission
-        if self.request.path == "/signupq" and not self.current_user:
-            self.redirect("/login")
-
         #If they try to retake the quiz
-        elif self.current_user.taken_assess == True:
+        if self.current_user and self.current_user.taken_assess == True:
             self.redirect("/homepage")
 
         options = getOption(1)
@@ -54,9 +38,10 @@ class SignupQuizHandler(Utilities):
         global answer
         global correct
 
-        if counter < 20:
+        if counter < 2:
             submitted = self.request.get("option")
 
+           #If they try to skip the question without submitting
             if submitted == "":
                 counter -= 1
                 self.redirect("/signupq")
@@ -69,33 +54,36 @@ class SignupQuizHandler(Utilities):
                 counter += 1
                 self.redirect("/signupq")
         else:
-            self.current_user.taken_assess == True
+            self.current_user_stats.points += 10
+
+            #Calculate percent
+            if correct > 1:
+                percent = float(100 * correct)  / 20
+            else:
+                percent = 0.0
+
+            self.current_user_stats.quizzes_complete += 1
+            self.current_user_stats.percentage_correct += percent
+
+            #Assign level
+            if correct > 18:
+                self.current_user.level = 3
+            elif correct < 18 and correct > 11:
+                self.current_user.level = 2
+            else:
+                self.current_user.level = 1
+
+            self.current_user.taken_assess = True
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
 
-
-#This will be profiles after tomorrow
 class ResultsHandler(Utilities):
     def get(self):
         global correct
+        global counter
+        t = jinja_env.get_template("results.html")
+        response = t.render(current_user = self.current_user, correct=correct)
+        self.response.write(response)
 
-         #TODO: fix this - none of the below attribute changes are working
-        self.current_user_stats.points += 10
-
-        #Calculate percent
-        if correct > 1:
-            percent = float(100 * correct)  / 20
-        else:
-            percent = 0.0
-        self.current_user_stats.quizzes_complete += 1
-        self.current_user_stats.percentage_correct += percent
-
-        #Assign level
-        if correct > 18:
-            self.current_user.level = 3
-        elif correct < 18 and correct > 11:
-            self.current_user.level = 2
-        else:
-            self.current_user.level = 1
-        self.response.out.write("You got " + str(correct) + " out of 20 questions correct. Congratulations! Your level is now: " + str(self.current_user.level) +
-        " and your total percentage correct is: " + str(self.current_user_stats.percentage_correct) + "%. You're ready to begin training!")
+        correct = 0
+        counter = 1
