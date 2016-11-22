@@ -38,7 +38,8 @@ class SignupQuizHandler(Utilities):
         global answer
         global correct
 
-        if counter < 2:
+        #If questions answered is less than total number of questions
+        if counter < 20:
             submitted = self.request.get("option")
 
            #If they try to skip the question without submitting
@@ -75,7 +76,7 @@ class SignupQuizHandler(Utilities):
 
             self.current_user.stats.taken_assess = True
 
-            self.current_user.stats.put()
+            self.current_user.stats.put() #Updates all the data in the database
 
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
@@ -88,5 +89,8 @@ class ResultsHandler(Utilities):
         response = t.render(current_user = self.current_user, correct=correct)
         self.response.write(response)
 
+        #Resets all the variables for use in another quiz
         correct = 0
         counter = 1
+        options = None
+        answer = None

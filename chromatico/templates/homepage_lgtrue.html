@@ -9,9 +9,9 @@
     <button class="button">Logout</button>
 </a>
 <br>
-    <p>{{ current_user.stats.taken_assess }}</p>
-    <p>{{ current_user.stats.quizzes_complete }}</p>
-    <p>{{ current_user.stats.percentage_correct }}</p>
-    <p>{{ current_user.stats.points }}</p>
+    <p>Taken the signup quiz? {{ current_user.stats.taken_assess }}</p>
+    <p>Quizzes complete: {{ current_user.stats.quizzes_complete }}</p>
+    <p>Total percentage correct: {{ current_user.stats.percentage_correct }}</p>
+    <p>Total points: {{ current_user.stats.points }}</p>
 
 {% endblock %}
