@@ -2,18 +2,16 @@
 {% block content %}
 <h5>[Insert more lil icons here]</h5>
 
-<h2>Welcome back, {{ stats.statistics_owner }}!</h2>
+<h2>Welcome back, {{ current_user.username }}!</h2>
 
 <br>
 <a href="/logout">
     <button class="button">Logout</button>
 </a>
 <br>
-    <p>{{ current_user.taken_assess }}</p>
-    <p>{{ stats.statistics_owner }}</p>
-    <p>{{ stats.quizzes_complete }}</p>
-    <p>{{ stats.percentage_correct }}</p>
-    <p>{{ stats.points }}</p>
+    <p>{{ current_user.stats.taken_assess }}</p>
+    <p>{{ current_user.stats.quizzes_complete }}</p>
+    <p>{{ current_user.stats.percentage_correct }}</p>
+    <p>{{ current_user.stats.points }}</p>
 
-    <!--TODO: Make more buttons for options like user quizzes, profile and options.-->
 {% endblock %}

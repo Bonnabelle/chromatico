@@ -10,7 +10,7 @@ class SignupQStartHandler(Utilities):
 
 #Initializes a new global set of options and their answer, a counter to count questions completed and a variable to track correct answers.
 counter = 1
-correct = 0
+correct = 1
 options = None
 answer = None
 
@@ -23,14 +23,14 @@ class SignupQuizHandler(Utilities):
         global answer
 
         #If they try to retake the quiz
-        if self.current_user and self.current_user.taken_assess == True:
+        if self.current_user and self.current_user.stats.taken_assess == True:
             self.redirect("/homepage")
 
         options = getOption(1)
         answer = getAnswer(options)
         audio = getAudio(answer)
         t = jinja_env.get_template("squiz.html")
-        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,correct=correct,audio=audio)
+        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
         self.response.write(response)
 
     def post(self):
@@ -54,16 +54,16 @@ class SignupQuizHandler(Utilities):
                 counter += 1
                 self.redirect("/signupq")
         else:
-            self.current_user_stats.points += 10
+            self.current_user.stats.points += 10
 
             #Calculate percent
-            if correct > 1:
+            if correct >= 1:
                 percent = float(100 * correct)  / 20
             else:
                 percent = 0.0
 
-            self.current_user_stats.quizzes_complete += 1
-            self.current_user_stats.percentage_correct += percent
+            self.current_user.stats.quizzes_complete + 1
+            self.current_user.stats.percentage_correct += percent
 
             #Assign level
             if correct > 18:
@@ -73,7 +73,8 @@ class SignupQuizHandler(Utilities):
             else:
                 self.current_user.level = 1
 
-            self.current_user.taken_assess = True
+            self.current_user.stats.taken_assess = True
+
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
 
@@ -85,5 +86,5 @@ class ResultsHandler(Utilities):
         response = t.render(current_user = self.current_user, correct=correct)
         self.response.write(response)
 
-        correct = 0
+        correct = 1
         counter = 1
