@@ -45,7 +45,7 @@ class Utilities(webapp2.RequestHandler):
         user = db.GqlQuery("SELECT * FROM User WHERE username = '%s'" % username)
         if user:
             return user.get()
-
+            
     def login_user(self, user):
         user_id = user.key().id()
         self.set_secure_cookie('user_id', str(user_id))
@@ -68,6 +68,7 @@ class Utilities(webapp2.RequestHandler):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
         self.current_user = uid and User.get_by_id(int(uid))
+
 
         if not self.current_user and self.request.path not in accessable:
             self.redirect('/login')

@@ -10,7 +10,7 @@ class SignupQStartHandler(Utilities):
 
 #Initializes a new global set of options and their answer, a counter to count questions completed and a variable to track correct answers.
 counter = 1
-correct = 1
+correct = 0
 options = None
 answer = None
 
@@ -62,7 +62,7 @@ class SignupQuizHandler(Utilities):
             else:
                 percent = 0.0
 
-            self.current_user.stats.quizzes_complete + 1
+            self.current_user.stats.quizzes_complete += 1
             self.current_user.stats.percentage_correct += percent
 
             #Assign level
@@ -75,6 +75,8 @@ class SignupQuizHandler(Utilities):
 
             self.current_user.stats.taken_assess = True
 
+            self.current_user.stats.put()
+
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
 
@@ -86,5 +88,5 @@ class ResultsHandler(Utilities):
         response = t.render(current_user = self.current_user, correct=correct)
         self.response.write(response)
 
-        correct = 1
+        correct = 0
         counter = 1
