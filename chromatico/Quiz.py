@@ -81,6 +81,66 @@ class SignupQuizHandler(Utilities):
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
 
+
+class quizHandler(Utilities):
+    def get(self):
+        global counter
+        global options
+        global correct
+        global answer
+
+        options = getOption(1)
+        answer = getAnswer(options)
+        audio = getAudio(answer)
+        t = jinja_env.get_template("quiz.html")
+        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
+        self.response.write(response)
+
+    def post(self):
+        global counter
+        global answer
+        global correct
+
+        #If questions answered is less than total number of questions
+        if counter < 20:
+            submitted = self.request.get("option")
+
+           #If they try to skip the question without submitting
+            if submitted == "":
+                counter -= 1
+                self.redirect("/quiz")
+
+            if answer == submitted:
+                counter += 1
+                correct += 1
+                self.redirect("/quiz")
+            else:
+                counter += 1
+                self.redirect("/quiz")
+        else:
+            self.current_user.stats.points += 10
+
+            #Calculate percent
+            if correct >= 1:
+                percent = float(100 * correct)  / 20
+            else:
+                percent = 0.0
+
+            self.current_user.stats.quizzes_complete += 1
+            self.current_user.stats.percentage_correct += percent
+
+            #Assign level
+            if self.current_user.stats.points >= 400:
+                self.current_user.level = 4
+            elif self.current_user.stats.points >= 300:
+                self.current_user.level = 3
+            elif self.current_user.stats.points >= 200:
+                self.current_user.level = 2
+
+            self.current_user.stats.put()
+            self.redirect("/results")
+
+
 class ResultsHandler(Utilities):
     def get(self):
         global correct

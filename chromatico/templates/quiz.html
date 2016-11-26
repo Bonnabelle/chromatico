@@ -1,0 +1,26 @@
+{% extends "spawn.html" %}
+{% block content %}
+
+<p>Question {{ counter }}.</p>
+<p> Identify the note as heard in the audio below.</p>
+    <audio controls>
+        <source src="{{ audio }}" type="audio/mp3">
+            There was an error loading the audio.
+    </audio>
+
+{{ answer }}
+<form method="post" action="/quiz">
+    <input type="radio" name="option" value="{{ op1 }}">{{ op1 }}
+    <br>
+    <input type="radio" name="option" value="{{ op2 }}">{{ op2 }}
+    <br>
+    <input type="radio" name="option" value="{{ op3 }}">{{ op3 }}
+    <br>
+    <input type="radio" name="option" value="{{ op4 }}">{{ op4 }}
+    <br>
+<input type="submit">
+</form>
+<br>
+
+
+{% endblock %}
