@@ -8,11 +8,12 @@ class SignupQStartHandler(Utilities):
         response = t.render()
         self.response.write(response)
 
-#Initializes a new global set of options and their answer, a counter to count questions completed and a variable to track correct answers.
-counter = 1
-correct = 0
-options = None
-answer = None
+#Initializes a new global set of variables to be used everywhere
+counter = 1         #Counts questions answered
+maxm = 1            #Variable to track custom number of questions (maximum allowed)
+correct = 0         #Counts how many correct
+options = None      #List of notes
+answer = None       #Answer from that list ^
 
 #Signup quiz
 class SignupQuizHandler(Utilities):
@@ -81,10 +82,26 @@ class SignupQuizHandler(Utilities):
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
 
+class quizCustomizerHandler(Utilities):
+    #TODO: Implement this class/webpage that allows a user to choose how many questions they want to do,
+    # What type of questions wil be in their quiz, and then pass those on to the quizHandler to generate a quiz
+    def get(self):
+        t = jinja_env.get_template("qcustomize.html")
+        response = t.render()
+        self.response.write(response)
+
+    def post(self):
+        global maxm
+        qnum = self.request.get("qnum")
+
+        maxm = qnum
+        self.redirect("/quiz")
+
+
+
 
 class quizHandler(Utilities):
     def get(self):
-        global counter
         global options
         global correct
         global answer
@@ -98,11 +115,12 @@ class quizHandler(Utilities):
 
     def post(self):
         global counter
+        global maxm
         global answer
         global correct
 
         #If questions answered is less than total number of questions
-        if counter < 20:
+        if counter <= maxm:
             submitted = self.request.get("option")
 
            #If they try to skip the question without submitting

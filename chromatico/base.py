@@ -15,6 +15,10 @@
 # limitations under the License.
 #
 
+#CHROMATICO - Final project #1 using Python 2/3 HTML + CSS and JavaScript
+
+
+
 #This is the base template for all the handlers to inherit from
 
 #Top-level imports

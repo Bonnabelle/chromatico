@@ -1,11 +1,8 @@
 #A set of useful tools for quiz generation
 import random
 
-#TODO: Make a list that contains either the frequencies of a note or the letter of the note. The frequencies looks cooler and make it harder to hack, harder to cheat.
 #References 440hz version of the chromatic scale, the most used scale in music. A drawback is that it only uses the 0th octave, the lowest frequency on the scale we can hear.
 #However, it is only used for reference. The pitches of the notes vary on the 10 octaves, so they all have the potential to be used.
-#TODO: Make a function that chooses which type of quiz will be generated: audio snippet or play-it-on-the-virtual-piano.
-#TODO: Then make a final function that will randomly select the two functions and return them for later use.
 
 all_freq = {"C" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/261.mp3",
             "C#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/277.mp3",
@@ -52,6 +49,7 @@ def getNote(ix):
         tone = minor_f_ls[random.randrange(0,len(minor_f_ls))]
         return tone
 
+#TODO: Fix the bug that puts the same note in a list multiple times
 def getOption(level):
     options = []
 
