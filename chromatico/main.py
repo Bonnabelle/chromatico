@@ -1,5 +1,5 @@
 from base import *
-import Quiz
+import quiz
 
 #TODO's found in handlers/base.py :)
 #NOTE: This class contains all the routes and runs the web app, and contains most of the handlers available to the public.
@@ -132,13 +132,13 @@ app = webapp2.WSGIApplication([
     ('/homepage', HomepageHandler),
     ('/resources', ResourcesHandler),
     ('/signup', SignupHandler),
-    ('/s-signupq', Quiz.SignupQStartHandler),
-    ('/signupq', Quiz.SignupQuizHandler), #Signup quiz handler
+    ('/s-signupq', quiz.SignupQStartHandler),
+    ('/signupq', quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    ('/results', Quiz.ResultsHandler),
-    ('/quiz', Quiz.quizHandler),
+    ('/results', quiz.ResultsHandler),
+    ('/quiz', quiz.quizHandler),
     ('/game-demo', GameHandler),
-    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', Quiz.ProfileHandler) #TODO: Implement this
+    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', quiz.ProfileHandler) #TODO: Implement this
 
 ], debug=True)
