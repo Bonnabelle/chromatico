@@ -18,7 +18,7 @@
 #This is the base template for all the handlers to inherit from
 
 #Top-level imports
-import webapp2, jinja2, os
+import webapp2, jinja2, os,sys
 from models import User, UserStats
 from util import * #Imports the security/misc. utilities needed to authenticate users and hash things.
 from google.appengine.ext import db
@@ -26,12 +26,11 @@ from google.appengine.ext import db
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
-#TODO: Handlers for the final tests for each level.
+sys.dont_write_bytecode = True
 
 #TODO: Once someone reaches level 4, they have access to the number/note fusion tool, allowing them to input numbers and there would be a mp3 audio output that mashed them all together according to 4/4 comon time
 
-#NOTE: Should be a large page and then you can choose which one you want to go to. Kind of like the all posts implementation in blogz. (Python version)
-#TODO: Handler for user quiz/training.
+#TODO: Handler for user to generate their own customized quiz, and then play that quiz
 
 accessable = [
     '/','/homepage','/about','/resources','/login','/signup'
@@ -45,7 +44,7 @@ class Utilities(webapp2.RequestHandler):
         user = db.GqlQuery("SELECT * FROM User WHERE username = '%s'" % username)
         if user:
             return user.get()
-            
+
     def login_user(self, user):
         user_id = user.key().id()
         self.set_secure_cookie('user_id', str(user_id))

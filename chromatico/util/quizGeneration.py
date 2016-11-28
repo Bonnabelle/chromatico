@@ -40,13 +40,8 @@ all_f_ls = ls = list(all_freq.keys())
 major_f_ls = ls = list(major_freq.keys())
 minor_f_ls = list(minor_freq.keys())
 
-#List to choose random frequencies from
-chooser = [all_f_ls,major_f_ls,minor_f_ls]
-
-def getNote():
-    ix = chooser[random.randrange(0,2)] #Chooses index to get a note from
-
-    #Gets random tone from random list
+def getNote(ix):
+    #Gets random tone from corresponding list
     if ix == all_f_ls:
         tone = all_f_ls[random.randrange(0,len(all_f_ls))]
         return tone
@@ -62,17 +57,16 @@ def getOption(level):
 
     if level == 1:
         for i in range(0,4):
-            options.append(getNote())
+            options.append(getNote(all_f_ls))
     elif level == 2:
         for i in range(0,6):
-            options.append(getNote())
+            options.append(getNote(all_f_ls))
     elif level == 3:
         for i in range(0,9):
-            options.append(getNote())
-
+            options.append(getNote(all_f_ls))
     elif level == 4:
         for i in range(0,11):
-            options.append(getNote())
+            options.append(getNote(all_freq))
 
     return options
 

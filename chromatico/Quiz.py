@@ -122,7 +122,7 @@ class quizHandler(Utilities):
 
             #Calculate percent
             if correct >= 1:
-                percent = float(100 * correct)  / 20
+                percent = float((100 * correct)  / 20) % 100
             else:
                 percent = 0.0
 
