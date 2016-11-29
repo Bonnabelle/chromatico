@@ -71,7 +71,7 @@ class Utilities(webapp2.RequestHandler):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
         self.current_user = uid and User.get_by_id(int(uid))
-        
+
         # If not a current user and they try to access the unaccessable
         if not self.current_user and self.request.path not in accessable:
             self.redirect('/login')

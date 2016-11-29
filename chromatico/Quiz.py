@@ -93,6 +93,7 @@ class quizCustomizerHandler(Utilities):
     def post(self):
         global maxm
         qnum = self.request.get("qnum")
+        qnum = int(qnum)
 
         maxm = qnum
         self.redirect("/quiz")
@@ -105,12 +106,13 @@ class quizHandler(Utilities):
         global options
         global correct
         global answer
+        global maxm
 
         options = getOption(1)
         answer = getAnswer(options)
         audio = getAudio(answer)
         t = jinja_env.get_template("quiz.html")
-        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
+        response = t.render(maxm=maxm,answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
         self.response.write(response)
 
     def post(self):
@@ -120,7 +122,7 @@ class quizHandler(Utilities):
         global correct
 
         #If questions answered is less than total number of questions
-        if counter <= maxm:
+        if counter < maxm:
             submitted = self.request.get("option")
 
            #If they try to skip the question without submitting
