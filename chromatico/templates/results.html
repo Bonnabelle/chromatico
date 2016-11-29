@@ -1,8 +1,8 @@
 {% extends "spawn.html" %}
 {% block content %}
 
-<p>You got {{ correct }} out of 20 questions correct. Congratulations! Your level is now {{ current_user.level }} and your total
-    percentage correct is {{ current_user.stats.percentage_correct }}%. You're ready to begin training!</p>
+<p>You got {{ correct }} out of {{ counter }} questions correct. Good job! Your level is now {{ current_user.level }} and your total
+    percentage correct is {{ current_user.stats.percentage_correct }}%.</p>
 <br>
 <a href="/homepage">
     <button class="button">Home</button>

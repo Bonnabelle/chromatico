@@ -11,9 +11,10 @@ class SignupQStartHandler(Utilities):
 #Initializes a new global set of variables to be used everywhere
 counter = 1         #Counts questions
 maxm = 1            #Variable to track custom number of questions (maximum allowed)
-correct = 0         #Counts how many correct
+correct = 1         #Counts how many correct
 options = None      #List of notes
 answer = None       #Answer from that list ^
+typ = None          #Type of questions
 
 #Signup quiz
 class SignupQuizHandler(Utilities):
@@ -22,6 +23,9 @@ class SignupQuizHandler(Utilities):
         global options
         global correct
         global answer
+        global maxm
+
+        maxm = 19
 
         #If they try to retake the quiz
         if self.current_user and self.current_user.stats.taken_assess == True:
@@ -38,9 +42,10 @@ class SignupQuizHandler(Utilities):
         global counter
         global answer
         global correct
+        global maxm
 
         #If questions answered is less than total number of questions
-        if counter <= 20:
+        if counter <= maxm:
             submitted = self.request.get("option")
 
            #If they try to skip the question without submitting
@@ -80,6 +85,7 @@ class SignupQuizHandler(Utilities):
             self.current_user.stats.put() #Updates all the data in the database
 
             self.redirect("/results")
+            #TODO: Make this work v
             #self.redirect("/%s/profile" % self.current_user.username)
 
 class QuizCustomizerHandler(Utilities):
@@ -92,6 +98,11 @@ class QuizCustomizerHandler(Utilities):
 
     def post(self):
         global maxm
+        global typ
+
+        typ_sub = self.request.get("type")
+        typ = typ_sub
+
         qnum = self.request.get("qnum")
         qnum = int(qnum)
 
@@ -155,7 +166,7 @@ class QuizHandler(Utilities):
                 self.current_user.level = 2
 
             self.current_user.stats.put()
-            self.redirect("/homepage")
+            self.redirect("/results")
             #TODO: Make this work v
             #self.redirect("/%s/profile" % self.current_user.username)
 
@@ -165,7 +176,7 @@ class ResultsHandler(Utilities):
         global correct
         global counter
         t = jinja_env.get_template("results.html")
-        response = t.render(current_user = self.current_user, correct=correct)
+        response = t.render(current_user = self.current_user, correct=correct,counter=counter)
         self.response.write(response)
 
         #Resets all the variables for use in another quiz

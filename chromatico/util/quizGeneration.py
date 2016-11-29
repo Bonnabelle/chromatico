@@ -71,9 +71,23 @@ def getTextOption(level):
 #TODO: Implement this - like getTextOption() but instead of returning the key, get the value
 def getAudioOption(level):
     options = []
-    pass
 
-#TODO: Implement this 
+    if level == 1:
+        for i in range(0,4):
+            options.append(all_freq.get(getNote(all_f_ls)))
+    elif level == 2:
+        for i in range(0,6):
+            options.append(all_freq.get(getNote(all_f_ls)))
+    elif level == 3:
+        for i in range(0,9):
+            options.append(all_freq.get(getNote(all_f_ls)))
+    elif level == 4:
+        for i in range(0,11):
+            options.append(all_freq.get(getNote(all_freq)))
+
+    return options
+
+#TODO: Implement this
 def getPiano(note):
     pass
 

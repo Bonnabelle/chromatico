@@ -30,7 +30,7 @@ from google.appengine.ext import db
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
-sys.dont_write_bytecode = True
+sys.dont_write_bytecode = 1
 
 #TODO: Once someone reaches level 4, they have access to the number/note fusion tool, allowing them to input numbers and there would be a mp3 audio output that mashed them all together according to 4/4 comon time
 
