@@ -38,9 +38,7 @@ html,head,body {
     padding-top: 30px;
 
 }
-.Menu:hover {
-    background-color: #98C57C;
-}
+
 /* Menu's link styles*/
 .Menu a {
     transition: 0.2s;

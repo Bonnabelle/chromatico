@@ -27,7 +27,7 @@ class SignupQuizHandler(Utilities):
         if self.current_user and self.current_user.stats.taken_assess == True:
             self.redirect("/homepage")
 
-        options = getOption(1)
+        options = getTextOption(1)
         answer = getAnswer(options)
         audio = getAudio(answer)
         t = jinja_env.get_template("squiz.html")
@@ -82,7 +82,7 @@ class SignupQuizHandler(Utilities):
             self.redirect("/results")
             #self.redirect("/%s/profile" % self.current_user.username)
 
-class quizCustomizerHandler(Utilities):
+class QuizCustomizerHandler(Utilities):
     #TODO: Implement this class/webpage that allows a user to choose how many questions they want to do,
     # What type of questions wil be in their quiz, and then pass those on to the quizHandler to generate a quiz
     def get(self):
@@ -98,17 +98,14 @@ class quizCustomizerHandler(Utilities):
         maxm = qnum
         self.redirect("/quiz")
 
-
-
-
-class quizHandler(Utilities):
+class QuizHandler(Utilities):
     def get(self):
         global options
         global correct
         global answer
         global maxm
 
-        options = getOption(1)
+        options = getTextOption(1)
         answer = getAnswer(options)
         audio = getAudio(answer)
         t = jinja_env.get_template("quiz.html")
@@ -158,7 +155,9 @@ class quizHandler(Utilities):
                 self.current_user.level = 2
 
             self.current_user.stats.put()
-            self.redirect("/results")
+            self.redirect("/homepage")
+            #TODO: Make this work v
+            #self.redirect("/%s/profile" % self.current_user.username)
 
 
 class ResultsHandler(Utilities):

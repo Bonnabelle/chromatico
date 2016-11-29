@@ -50,7 +50,7 @@ def getNote(ix):
         return tone
 
 #TODO: Fix the bug that puts the same note in a list multiple times
-def getOption(level):
+def getTextOption(level):
     options = []
 
     if level == 1:
@@ -67,6 +67,15 @@ def getOption(level):
             options.append(getNote(all_freq))
 
     return options
+
+#TODO: Implement this - like getTextOption() but instead of returning the key, get the value
+def getAudioOption(level):
+    options = []
+    pass
+
+#TODO: Implement this 
+def getPiano(note):
+    pass
 
 #Chooses a note to be the answer out of the options list
 def getAnswer(options):

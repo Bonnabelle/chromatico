@@ -1,17 +1,19 @@
 {% extends 'spawn.html' %}
 {% block content %}
+
 <h5>[Insert more lil icons here]</h5>
 
 <h2>Welcome back, {{ current_user.username }}!</h2>
-
+<br>
+<!--<a href="/{{current_user.username}}/profile">Profile</a>-->
 <br>
 <a href="/logout">
     <button class="button">Logout</button>
 </a>
 <br>
-    <p>Taken the signup quiz? {{ current_user.stats.taken_assess }}</p>
     <p>Quizzes complete: {{ current_user.stats.quizzes_complete }}</p>
     <p>Total percentage correct: {{ current_user.stats.percentage_correct }}</p>
     <p>Total points: {{ current_user.stats.points }}</p>
+    <p>Current Level: {{ current_user.level }}</p>
 
 {% endblock %}
