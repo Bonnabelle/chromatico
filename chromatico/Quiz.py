@@ -9,7 +9,7 @@ class SignupQStartHandler(Utilities):
         self.response.write(response)
 
 #Initializes a new global set of variables to be used everywhere
-counter = 1         #Counts questions answered
+counter = 1         #Counts questions
 maxm = 1            #Variable to track custom number of questions (maximum allowed)
 correct = 0         #Counts how many correct
 options = None      #List of notes
@@ -40,7 +40,7 @@ class SignupQuizHandler(Utilities):
         global correct
 
         #If questions answered is less than total number of questions
-        if counter < 20:
+        if counter <= 20:
             submitted = self.request.get("option")
 
            #If they try to skip the question without submitting
