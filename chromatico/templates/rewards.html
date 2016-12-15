@@ -1,0 +1,54 @@
+{% extends "spawn.html"%}
+{% block content %}
+
+<h1>Games</h1>
+    <p>Welcome! We all need a break from studying. Why not spend some time here on the rewards page?
+       Every time you level up you get access to a new game. Below the game(s) is a virtual piano for you
+       to practice on or make songs with! Have fun!</p>
+<br>
+{% if current_user.level == 1 %}
+<div align="center">
+    <object width="640" height="480">
+        <param name="movie" value="http://www.embeddablegames.net/embedgames/superflashmariobros.swf">
+        <param name="quality" value="high"><embed src="http://www.embeddablegames.net/embedgames/superflashmariobros.swf" quality="high" width="640" height="400" type="application/x-shockwave-flash" pluginspage= "http://www.macromedia.com/go/getflashplayer">
+        </embed>
+    </object>
+</div>
+{% endif %}
+
+{% if current_user.level == 2 %}
+<iframe src="http://www.freeonlinegames.com/embed/21645" width="640" height="480" frameborder="no" scrolling="no"></iframe>
+{% endif %}
+
+{% if current_user.level == 3 %}
+<p>Congratulations on getting to level 3!!
+   You've worked hard to get here, so enjoy these games specially selected for level 3 users.</p>
+   <br>
+   1. Dream Symphony
+   <br>
+   <embed width="640" height="480" base="http://external.kongregate-games.com/gamez/0015/5848/live/" src="http://external.kongregate-games.com/gamez/0015/5848/live/embeddable_155848.swf" type="application/x-shockwave-flash"></embed>
+   <br>
+   2. Ducklife 3: Evolution (This one is pretty addicting)
+   <br>
+   <embed width="750" height="480" base="http://external.kongregate-games.com/gamez/0011/2133/live/" src="http://external.kongregate-games.com/gamez/0011/2133/live/embeddable_112133.swf" type="application/x-shockwave-flash"></embed>
+   <br>
+   3. Continuity
+   <br>
+   <embed width="640" height="480" base="http://external.kongregate-games.com/gamez/0007/3515/live/" src="http://external.kongregate-games.com/gamez/0007/3515/live/embeddable_73515.swf" type="application/x-shockwave-flash"></embed>
+   <br>
+{% endif %}
+
+
+<h1>Piano Example</h1>
+    <p>I am currently in the early stages of development with a virtual piano of my own, but in the end it will function similar to the one below.</p>
+<div alig="center">
+    <object width="1000" height="250"><param name="movie" value="http://www.buttonbass.com/images/PianoEditor.swf"><param name="wmode" value="transparent">
+        <embed src="http://www.buttonbass.com/images/PianoEditor.swf" type="application/x-shockwave-flash" wmode="transparent" width="1000" height="250">
+    </embed>
+    </object>
+</div>
+<br>
+<p>This piano comes from <a href="http://www.buttonbass.com">buttonbass.com</a>.</p>
+
+
+{% endblock %}

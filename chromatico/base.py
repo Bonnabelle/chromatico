@@ -32,6 +32,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), a
 
 sys.dont_write_bytecode = 1
 
+
 #TODO: Once someone reaches level 4, they have access to the number/note fusion tool, allowing them to input numbers and there would be a mp3 audio output that mashed them all together according to 4/4 comon time
 
 #TODO: Handler for user to generate their own customized quiz, and then play that quiz

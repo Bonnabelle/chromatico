@@ -3,7 +3,7 @@ from google.appengine.ext import db
 class UserStats(db.Model):
     taken_assess = db.BooleanProperty(required = True)
     quizzes_complete = db.IntegerProperty()
-    percentage_correct = db.FloatProperty()
+    percentages = db.ListProperty(float)
     points = db.IntegerProperty()
 
 class User(db.Model):

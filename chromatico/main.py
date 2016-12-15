@@ -23,8 +23,14 @@ class HomepageHandler(Utilities):
             response = t.render()
             self.response.write(response)
         else:
+            total = 0.0
+            for i in self.current_user.stats.percentages:
+                total += i
+            if len(self.current_user.stats.percentages) != 0:
+                total = (total / len(self.current_user.stats.percentages) * 10) % 100
+
             t = jinja_env.get_template("homepage_lgtrue.html")
-            response = t.render(current_user = self.current_user)
+            response = t.render(current_user = self.current_user, percent = total)
             self.response.write(response)
 #Resources
 class ResourcesHandler(Utilities):
@@ -53,7 +59,7 @@ class SignupHandler(Utilities):
 
         if username != False and pas != False and pas_ver != False and sub_em != False:
             pw_hash = hashutils.make_pw_hash(username, pas)
-            current_user_stats =  UserStats(taken_assess = False, quizzes_complete = 0, percentage_correct = 0.0, points = 0)
+            current_user_stats =  UserStats(taken_assess = False, quizzes_complete = 0, percentages = [], points = 0)
             current_user_stats.put()
             user = User(username=username, pw_hash=pw_hash, email = em, level = 1, stats=current_user_stats)
             user.put()
@@ -121,14 +127,14 @@ class LogoutHandler(Utilities):
 """class AboutHandler(Utilities):
 """
 
-class ProfileHandler(Utilities):
-    def get(self,username=""):
-        self.response.out.write("Hello world!")
-
+"""class ProfileHandler(Utilities):
+    def get(self,username):
+        self.response.out.write("Hello world!" + str(username))
+"""
 class GameHandler(Utilities):
     def get(self):
-        t = jinja_env.get_template("game_example.html")
-        response = t.render()
+        t = jinja_env.get_template("rewards.html")
+        response = t.render(current_user=self.current_user)
         self.response.write(response)
 
 app = webapp2.WSGIApplication([
@@ -143,7 +149,7 @@ app = webapp2.WSGIApplication([
     ('/results', quiz.ResultsHandler),
     ('/custom-q', quiz.QuizCustomizerHandler),
     ('/quiz', quiz.QuizHandler),
-    ('/game-demo', GameHandler),
-    webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler) #TODO: Implement this
+    ('/rewards', GameHandler),
+    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler) #TODO: Implement this
 
 ], debug=True)
