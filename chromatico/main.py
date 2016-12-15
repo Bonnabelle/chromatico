@@ -127,6 +127,48 @@ class LogoutHandler(Utilities):
 """class AboutHandler(Utilities):
 """
 
+class OptionsHandler(Utilities):
+    def get(self):
+        t = jinja_env.get_template("options.html")
+        response = t.render()
+        self.response.write(response)
+
+    def post(self):
+        new_u = self.request.get("new_u")
+        new_pass = self.request.get("new_pass")
+        ver_pass = self.request.get("ver_pass")
+        new_e = self.request.get("new_e")
+
+        if new_u != "":
+            username = validations.validate_username(new_u)
+            if username != False:
+                self.current_user.username = username
+
+        if new_e != "":
+            em = validations.validate_email(new_e)
+            if em != False:
+                self.current_user.email = em
+
+        self.current_user.put()
+        self.redirect("/homepage")
+
+        #self.redirect("/homepage")
+
+
+class ExterminateHandler(Utilities):
+    def get(self):
+        t = jinja_env.get_template("exterminate.html")
+        response = t.render()
+        self.response.write(response)
+
+    def post(self):
+        self.current_user.delete()
+        self.redirect("/logout")
+
+
+
+
+
 """class ProfileHandler(Utilities):
     def get(self,username):
         self.response.out.write("Hello world!" + str(username))
@@ -146,6 +188,8 @@ app = webapp2.WSGIApplication([
     ('/signupq', quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
+    ('/options', OptionsHandler),
+    ('/delete', ExterminateHandler),
     ('/results', quiz.ResultsHandler),
     ('/custom-q', quiz.QuizCustomizerHandler),
     ('/quiz', quiz.QuizHandler),

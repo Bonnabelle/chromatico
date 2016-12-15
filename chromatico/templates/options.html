@@ -1,0 +1,31 @@
+{% extends "spawn.html" %}
+{% block content %}
+
+<h3>Options</h3>
+    <p>Feel like changing things up? That's what this page is for. Here you can
+        change your username, password and email. Or, if you feel like giving up,
+        you can delete your acount entirely.</p>
+
+    <h3>Change username/email</h3>
+    <h6>At this time you cannot change your password, but this is coming in the near future.</h6>
+        <form method="post">
+            New username: <input type="text" name="new_u"></input>
+            <br>
+            <br>
+            Change email: <input type="email" name="new_e"></input>
+            <br>
+            <br>
+            <input type="submit">
+        </form>
+    <br>
+    <h3>Delete account</h3>
+    <img src="https://65.media.tumblr.com/51dbbda7b4a48bce610dd4352832787f/tumblr_inline_n8oefs36n41rxh1p7.gif" alt="Error loading gif. Sorry." style="width:128px;height:128px;">
+    <br>
+    <br>
+    <a href="/delete">
+        <button class="imp_button">Delete</button>
+    </a>
+    <br>
+    <br>
+
+{% endblock %}
