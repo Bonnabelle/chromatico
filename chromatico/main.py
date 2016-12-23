@@ -27,7 +27,7 @@ class HomepageHandler(Utilities):
             for i in self.current_user.stats.percentages:
                 total += i
             if len(self.current_user.stats.percentages) != 0:
-                total = (total / len(self.current_user.stats.percentages) * 10) % 100
+                total = (total / len(self.current_user.stats.percentages) * 10) % 101
 
             t = jinja_env.get_template("homepage_lgtrue.html")
             response = t.render(current_user = self.current_user, percent = total)
@@ -167,12 +167,13 @@ class ExterminateHandler(Utilities):
 
 
 
+class StudyHandler(Utilities):
+    def get(self):
+        t = jinja_env.get_template("study.html")
+        response = t.render()
+        self.response.write(response)
 
 
-"""class ProfileHandler(Utilities):
-    def get(self,username):
-        self.response.out.write("Hello world!" + str(username))
-"""
 class GameHandler(Utilities):
     def get(self):
         t = jinja_env.get_template("rewards.html")
@@ -193,7 +194,8 @@ app = webapp2.WSGIApplication([
     ('/results', quiz.ResultsHandler),
     ('/custom-q', quiz.QuizCustomizerHandler),
     ('/quiz', quiz.QuizHandler),
-    ('/rewards', GameHandler),
-    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler) #TODO: Implement this
+    ('/study', StudyHandler),
+    ('/rewards', GameHandler)
+    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler) 
 
 ], debug=True)

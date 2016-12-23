@@ -76,3 +76,6 @@ class Utilities(webapp2.RequestHandler):
         # If not a current user and they try to access the unaccessable
         if not self.current_user and self.request.path not in accessable:
             self.redirect('/login')
+
+        elif self.current_user and self.request.path == '/login':
+            self.redirect('/logout')

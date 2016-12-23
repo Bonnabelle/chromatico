@@ -152,3 +152,100 @@ html,head,body {
 .FrontPage p {
     text-indent: 25px;
 }
+
+/* Piano CSS */
+
+#piano {
+	width: 713px;
+	margin: 50px auto;
+	border: 8px solid black;
+	height: 350px;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#piano a:link {
+	transition: 0.4s;
+	text-decoration: none;
+	color: gray;
+}
+
+.hide {
+	color: black;
+	transition: 0.4s;
+}
+
+.key {
+	width: 100px;
+	height: 350px;
+	border: 1px solid black;
+	float: left;
+	border-radius: 0 0 7px 5px;
+	border-bottom-width: 2px;
+	background: white;
+}
+
+#c-key {
+	border-left-width: 2px;
+}
+
+#b-key {
+	border-right-width: 2px;
+}
+
+.key:hover {
+	background: gray;
+}
+
+.key p {
+	margin-top: 310px;
+}
+
+.black-key {
+	color: gray;
+	transition: 0.4s;
+	width: 75px;
+	height: 180px;
+	background: black;
+	display: inline-block;
+	position: absolute;
+	border-radius: 0px 0px 10px 10px;
+}
+
+.black-key p {
+	color: gray;
+	margin-top: 150px;
+
+}
+
+.black-key:hover {
+	background-color: #111111;
+}
+
+#db-key {
+	margin-left: -648px;
+}
+
+#eb-key {
+	margin-left: -547px;
+}
+
+#gb-key {
+	margin-left: -345px;
+}
+
+#ab-key {
+	margin-left: -245px;
+}
+
+#bb-key {
+	margin-left: -145px;
+}
+
+.black-key:active {
+	color: white;
+}
+
+.hide:hover {
+	color: white;
+}

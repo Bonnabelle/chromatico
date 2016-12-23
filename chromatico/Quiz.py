@@ -139,7 +139,7 @@ class QuizHandler(Utilities):
 
             #Calculate percent
             if correct >= 1:
-                percent = float(((100 * correct)  / 20) * 10) % 100
+                percent = float(((100 * correct)  / 20) * 10) % 101
             else:
                 percent = 0.0
 
@@ -164,7 +164,7 @@ class ResultsHandler(Utilities):
     def get(self):
         global correct
         global counter
-        percent = float((100 * correct)  / counter) % 100
+        percent = float((100 * correct)  / counter) % 101
         t = jinja_env.get_template("results.html")
         response = t.render(current_user = self.current_user, correct=correct,counter=counter,percent=percent)
         self.response.write(response)
