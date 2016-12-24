@@ -1,9 +1,13 @@
+/* Global CSS */
+
 html,head,body {
     padding-top: 0px;
     margin-top: 0px;
     vertical-align: baseline;
     text-decoration: none;
 }
+
+/* Error CSS */
 .error {
     color: red;
 }
@@ -13,31 +17,43 @@ html,head,body {
     cursor: not-allowed;
 }
 
+/* Button CSS */
+
 .button {
     background-color: #808080;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 14px 32px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     margin: 4px 2px;
     transition: 0.4s;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: #666666;
 }
 
 .imp_button {
     background-color: red;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 10px 32px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     margin: 4px 2px;
     transition: 0.4s;
     cursor: pointer;
+    border-radius: 10px;
 }
+
+
+
+/* Menu CSS */
 
 .Menu {
     height: 100%;
@@ -91,9 +107,37 @@ html,head,body {
 #main {
     margin-top: 0px;
     transition: margin-left 0.5s;
-
 }
 
+/* Table CSS */
+
+div .form {
+    width: 100%;
+}
+
+.table td {
+    margin-bottom: 15px;
+}
+
+.table-subm {
+    background-color: #808080;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 10px 2px 0px 90px;
+	transition: 0.4s;
+	cursor: pointer;
+    border-radius: 10px;
+}
+
+.table-subm:hover {
+    background-color: #666666;
+}
+
+/* Frontpage CSS*/
 
 .FrontPage {
     text-align: justify;

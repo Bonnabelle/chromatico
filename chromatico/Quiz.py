@@ -40,7 +40,7 @@ class SignupQuizHandler(Utilities):
         global correct
 
         #If questions answered is less than total number of questions
-        if counter <= 20:
+        if counter <= 19:
             submitted = self.request.get("option")
 
            #If they try to skip the question without submitting

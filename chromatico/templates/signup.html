@@ -2,23 +2,35 @@
 {% block content %}
 
 <h3>Signup Guidelines</h3>
-    <li><h4>Your username and password must be 8-20 characters long with no spaces, punctuation, or special characters.</h4></li>
-    <li><h4>Entering your email is optional, but if you do, please do not include any spaces or invalid email providers. (spam emails, 10 minute mails, etc.)</h4></li>
-
-<form method="post">
-    Username:
-      <input type="text" name="username"> <p class="error"><p>{{ errors.ue }}</p>
-    <br>
-    Password:
-      <input type="password" name="password"> <p class="error"><p>{{ errors.pe }}</p>
-    <br>
-    Verify password:
-      <input type="password" name="password_ver"> <p class="error"><p>{{ errors.pve }}</p>
-    <br>
-    Email (optional):
-        <input type="email" name="email"> <p class="error"><p>{{ errors.e_e }}</p>
-    <br>
-    <input type="submit">
-</form>
+    <ul>
+        <li><h4>Your username and password must be 8-20 characters long with no spaces, punctuation, or special characters.</h4></li>
+        <li><h4>Entering your email is optional, but if you do, please do not include any spaces or invalid email providers. (spam emails, 10 minute mails, etc.)</h4></li>
+    </ul>
+<br>
+<div class="form">
+    <form  method="post">
+    	<table class="table">
+        	<tr>
+          		<th>Username:</th>
+          		<td><input type="text" name="username"> <p class="error"></td><td class="error">{{ errors.ue }}</td>
+            </tr>
+            <tr>
+               	<th>Password:</th>
+            	<td><input type="password" name="password"></td><td class="error">{{ errors.pe }}</td>
+            </tr>
+            <tr>
+                <th>Verify Pass:</th>
+                <td><input type="password" name="password_ver"></td><td class="error">{{ errors.pve }}</td>
+            </tr>
+            <tr>
+                <th>Email (optional):</th>
+                <td><input name="email" type="email"></td><td class="error">{{ errors.e_e }}</td>
+            </tr>
+       </table>
+        <input type="submit" class="table-subm">
+    </form>
+</div>
+<br>
+<br>
 
 {% endblock %}
