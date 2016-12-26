@@ -164,6 +164,7 @@ class ResultsHandler(Utilities):
     def get(self):
         global correct
         global counter
+        global maxm
         percent = float((100 * correct)  / counter) % 101
         t = jinja_env.get_template("results.html")
         response = t.render(current_user = self.current_user, correct=correct,counter=counter,percent=percent)
@@ -172,5 +173,6 @@ class ResultsHandler(Utilities):
         #Resets all the variables for use in another quiz
         correct = 0
         counter = 0
+        maxm = 1
         options = None
         answer = None

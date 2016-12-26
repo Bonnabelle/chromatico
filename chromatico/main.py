@@ -20,7 +20,7 @@ class HomepageHandler(Utilities):
     def get(self):
         if not self.current_user:
             t = jinja_env.get_template("homepage_lgfalse.html")
-            response = t.render()
+            response = t.render(visits=self.visits, users=self.users)
             self.response.write(response)
         else:
             total = 0.0
@@ -30,7 +30,7 @@ class HomepageHandler(Utilities):
                 total = (total / len(self.current_user.stats.percentages) * 10) % 101
 
             t = jinja_env.get_template("homepage_lgtrue.html")
-            response = t.render(current_user = self.current_user, percent = total)
+            response = t.render(current_user = self.current_user, percent = total,visits=self.visits,users=self.users)
             self.response.write(response)
 #Resources
 class ResourcesHandler(Utilities):
@@ -63,11 +63,12 @@ class SignupHandler(Utilities):
             current_user_stats.put()
             user = User(username=username, pw_hash=pw_hash, email = em, level = 1, stats=current_user_stats)
             user.put()
-
+            self.users += 1
 
             self.login_user(user)
 
             self.redirect('/s-signupq')
+
         else:
             error = True
 
@@ -163,6 +164,7 @@ class ExterminateHandler(Utilities):
 
     def post(self):
         self.current_user.delete()
+        self.users -= 1
         self.redirect("/logout")
 
 
@@ -196,6 +198,6 @@ app = webapp2.WSGIApplication([
     ('/quiz', quiz.QuizHandler),
     ('/study', StudyHandler),
     ('/rewards', GameHandler)
-    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler) 
+    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler)
 
 ], debug=True)

@@ -17,6 +17,12 @@ html,head,body {
     cursor: not-allowed;
 }
 
+.big-pic {
+    float: right;
+    width: 500px;
+    height: 600px;
+}
+
 /* Button CSS */
 
 .button {
@@ -140,10 +146,12 @@ div .form {
 /* Frontpage CSS*/
 
 .FrontPage {
+    margin: auto;
     text-align: justify;
 }
 
 .FrontPage a{
+    margin: auto;
     transition: .2s;
     text-decoration: none;
     color: gray;
@@ -227,14 +235,6 @@ div .form {
 	border-radius: 0 0 7px 5px;
 	border-bottom-width: 2px;
 	background: white;
-}
-
-#c-key {
-	border-left-width: 2px;
-}
-
-#b-key {
-	border-right-width: 2px;
 }
 
 .key:hover {
