@@ -51,22 +51,22 @@ def getNote(ix):
 
 #TODO: Fix the bug that puts the same note in a list multiple times
 def getTextOption(level):
-    options = []
+    options = set()
 
     if level == 1:
-        for i in range(0,4):
-            options.append(getNote(all_f_ls))
+        while len(options) < 4:
+            options.add(getNote(all_f_ls))
     elif level == 2:
-        for i in range(0,6):
-            options.append(getNote(all_f_ls))
+        while len(options) < 6:
+            options.add(getNote(all_f_ls))
     elif level == 3:
-        for i in range(0,9):
-            options.append(getNote(all_f_ls))
+        while len(options) < 9:
+            options.add(getNote(all_f_ls))
     elif level == 4:
-        for i in range(0,11):
-            options.append(getNote(all_freq))
+        while len(options) < 11:
+            options.add(getNote(all_f_ls))
 
-    return options
+    return list(options)
 
 #TODO: Implement this - like getTextOption() but instead of returning the key, get the value
 def getAudioOption(level):
@@ -87,10 +87,6 @@ def getAudioOption(level):
 
     return options
 
-#TODO: Implement this
-def getPiano(note):
-    pass
-
 #Chooses a note to be the answer out of the options list
 def getAnswer(options):
     return options[random.randrange(0,len(options))]
@@ -98,5 +94,4 @@ def getAnswer(options):
 def getAudio(note):
     if all_freq.has_key(note):
         return all_freq.get(note)
-    else:
-        return ""
+    return ""

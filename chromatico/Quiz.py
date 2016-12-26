@@ -31,7 +31,7 @@ class SignupQuizHandler(Utilities):
         answer = getAnswer(options)
         audio = getAudio(answer)
         t = jinja_env.get_template("squiz.html")
-        response = t.render(answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
+        response = t.render(op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
         self.response.write(response)
 
     def post(self):
@@ -109,7 +109,7 @@ class QuizHandler(Utilities):
         answer = getAnswer(options)
         audio = getAudio(answer)
         t = jinja_env.get_template("quiz.html")
-        response = t.render(maxm=maxm,answer=answer,op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
+        response = t.render(op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
         self.response.write(response)
 
     def post(self):

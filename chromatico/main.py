@@ -20,7 +20,7 @@ class HomepageHandler(Utilities):
     def get(self):
         if not self.current_user:
             t = jinja_env.get_template("homepage_lgfalse.html")
-            response = t.render(visits=self.visits, users=self.users)
+            response = t.render(users=self.users)
             self.response.write(response)
         else:
             total = 0.0
@@ -30,7 +30,7 @@ class HomepageHandler(Utilities):
                 total = (total / len(self.current_user.stats.percentages) * 10) % 101
 
             t = jinja_env.get_template("homepage_lgtrue.html")
-            response = t.render(current_user = self.current_user, percent = total,visits=self.visits,users=self.users)
+            response = t.render(current_user = self.current_user, percent = total,users=self.users)
             self.response.write(response)
 #Resources
 class ResourcesHandler(Utilities):
@@ -40,6 +40,7 @@ class ResourcesHandler(Utilities):
         self.response.write(response)
 
 #Signup
+errors = {}
 class SignupHandler(Utilities):
     def get(self):
         t =  jinja_env.get_template("signup.html")
@@ -178,9 +179,21 @@ class StudyHandler(Utilities):
 
 class GameHandler(Utilities):
     def get(self):
+        comments = db.GqlQuery("SELECT * FROM Comment ORDER BY created DESC")
         t = jinja_env.get_template("rewards.html")
-        response = t.render(current_user=self.current_user)
+        response = t.render(current_user=self.current_user,comments=comments)
         self.response.write(response)
+
+    def post(self):
+        content = self.request.get("content")
+
+        if content:
+            # create a new Post object and store it in the database
+            author = self.current_user
+            comment = Comment(content=content,author=author)
+            comment.put()
+
+            self.redirect("/rewards")
 
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),

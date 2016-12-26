@@ -23,6 +23,15 @@ html,head,body {
     height: 600px;
 }
 
+/* Comment CSS */
+
+.comment {
+    border: solid 1px gray;
+    width: 500px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
 /* Button CSS */
 
 .button {
@@ -114,6 +123,7 @@ html,head,body {
     margin-top: 0px;
     transition: margin-left 0.5s;
 }
+
 
 /* Table CSS */
 

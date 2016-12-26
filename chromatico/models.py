@@ -12,3 +12,8 @@ class User(db.Model):
     email = db.StringProperty()
     level = db.IntegerProperty() #Assigned from quiz
     stats = db.ReferenceProperty(UserStats)
+
+class Comment(db.Model):
+    content = db.TextProperty(required = True)
+    created = db.DateTimeProperty(auto_now_add = True)
+    author = db.ReferenceProperty(User,required=True)

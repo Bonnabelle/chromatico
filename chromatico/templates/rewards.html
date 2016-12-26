@@ -38,6 +38,35 @@
    <br>
 {% endif %}
 
+<div align="center">
+    <button class="button" onclick="comments(true)" id="comb1">Show Comments</button> <button class="button" onclick="comments(false)" id="comb2">Hide Comments</button>
+    <div id="comments" align="center">
+        <form method="post">
+            Submit a comment (Make sure to refresh the page afterwards to see it!):
+            <br>
+            <textarea rows="4" cols="35" name="content"></textarea>
+            <br>
+            <input type="submit">
+        </form>
+        <br>
+        {% for c in comments %}
+            <div class="comment">
+                <p>{{ c.content }}</p>
+                <h6>Written by {{ c.author.username }} on {{ c.created.strftime('%Y-%m-%d') }}.</h6>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function comments(bool) {
+        document.getElementById("comments")
+        if(bool == true)
+            document.getElementById("comments").style.display="block";
+        else
+            document.getElementById("comments").style.display="none";
+        }
+</script>
 
 <h1>Piano Example</h1>
     <p>I am currently in the early stages of development with a virtual piano of my own, but in the end it will function similar to the one below.</p>

@@ -23,7 +23,7 @@
 
 #Top-level imports
 import webapp2, jinja2, os,sys
-from models import User, UserStats
+from models import *
 from util import * #Imports the security/misc. utilities needed to authenticate users and hash things.
 from google.appengine.ext import db
 
@@ -39,16 +39,24 @@ sys.dont_write_bytecode = 1
 accessable = [
     '/','/homepage','/about','/resources','/login','/signup'
 ]
-
-errors = {}
-visits = 0
 users = 0
+visits = 0
 
 class Utilities(webapp2.RequestHandler):
     def get_user_info(self, username):
         user = db.GqlQuery("SELECT * FROM User WHERE username = '%s'" % username)
         if user:
             return user.get()
+
+    def get_user_amount(self):
+        users = db.GqlQuery("SELECT * FROM User")
+        i = 0
+        for u in users:
+            i += 1
+        return i
+
+    def get_comments(self):
+        pass
 
     def login_user(self, user):
         user_id = user.key().id()
@@ -72,10 +80,7 @@ class Utilities(webapp2.RequestHandler):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
         self.current_user = uid and User.get_by_id(int(uid))
-        self.visits = visits
-        self.users = users
-
-        self.visits += 1
+        self.users = self.get_user_amount()
 
         # If not a current user and they try to access the unaccessable
         if not self.current_user and self.request.path not in accessable:
