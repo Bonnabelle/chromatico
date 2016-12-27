@@ -14,6 +14,7 @@ maxm = 1            #Variable to track custom number of questions (maximum allow
 correct = 0         #Counts how many correct
 options = None      #List of notes
 answer = None       #Answer from that list ^
+typ = None
 
 #Signup quiz
 class SignupQuizHandler(Utilities):
@@ -91,9 +92,13 @@ class QuizCustomizerHandler(Utilities):
         self.response.write(response)
 
     def post(self):
+        global typ
         global maxm
         qnum = self.request.get("qnum")
         qnum = int(qnum)
+
+        qtype = self.request.get("type")
+        typ = qtype
 
         maxm = qnum
         self.redirect("/quiz")
@@ -104,12 +109,26 @@ class QuizHandler(Utilities):
         global correct
         global answer
         global maxm
+        global typ
 
-        options = getTextOption(1)
-        answer = getAnswer(options)
-        audio = getAudio(answer)
+        audio = ""
+
+        if typ == "Text":
+            options = getTextOption(self.current_user.level)
+            answer = getAnswer(options,"Text")
+            audio = getAudio(answer)
+        elif typ == "Audio":
+            options = getAudioOption(self.current_user.level)
+            answer = getAnswer(options,"Audio")
+        elif typ == "Random":
+            boo = random.randrange(0,2)
+            options = getRandomOption(self.current_user.level, boo)
+            answer = getAnswer(options, boo)
+            if boo == 0:
+                audio = answer
+
         t = jinja_env.get_template("quiz.html")
-        response = t.render(op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
+        response = t.render(options=options, counter=counter,note=answer,audio=audio)
         self.response.write(response)
 
     def post(self):
@@ -127,7 +146,7 @@ class QuizHandler(Utilities):
                 counter -= 1
                 self.redirect("/quiz")
 
-            if answer == submitted:
+            if answer == submitted or submitted == all_freq.get(answer):
                 counter += 1
                 correct += 1
                 self.redirect("/quiz")

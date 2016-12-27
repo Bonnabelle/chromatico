@@ -33,8 +33,8 @@ minor_freq = {"C#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/ma
               "A#" : "https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/466.mp3"}
 
 #All the values of the frequencies
-all_f_ls = ls = list(all_freq.keys())
-major_f_ls = ls = list(major_freq.keys())
+all_f_ls = list(all_freq.keys())
+major_f_ls = list(major_freq.keys())
 minor_f_ls = list(minor_freq.keys())
 
 def getNote(ix):
@@ -68,28 +68,38 @@ def getTextOption(level):
 
     return list(options)
 
-#TODO: Implement this - like getTextOption() but instead of returning the key, get the value
 def getAudioOption(level):
-    options = []
+    options = set()
 
     if level == 1:
-        for i in range(0,4):
-            options.append(all_freq.get(getNote(all_f_ls)))
+        while len(options) < 4:
+            options.add(all_freq.get(getNote(all_f_ls)))
     elif level == 2:
-        for i in range(0,6):
-            options.append(all_freq.get(getNote(all_f_ls)))
+        while len(options) < 6:
+            options.add(all_freq.get(getNote(all_f_ls)))
     elif level == 3:
-        for i in range(0,9):
-            options.append(all_freq.get(getNote(all_f_ls)))
+        while len(options) < 9:
+            options.add(all_freq.get(getNote(all_f_ls)))
     elif level == 4:
-        for i in range(0,11):
-            options.append(all_freq.get(getNote(all_freq)))
+        while len(options) < 11:
+            options.add(all_freq.get(getNote(all_freq)))
 
-    return options
+    return list(options)
+
+def getRandomOption(level,boo):
+    if boo == 1:
+        return getAudioOption(level)
+    return getTextOption(level)
 
 #Chooses a note to be the answer out of the options list
-def getAnswer(options):
-    return options[random.randrange(0,len(options))]
+def getAnswer(options,typ):
+    if typ != "Audio" or typ == 0:
+        return options[random.randrange(0,len(options))]
+
+    answer = options[random.randrange(0,len(options))]
+    for note in all_freq.keys():
+        if all_freq.get(note) == answer:
+            return note
 
 def getAudio(note):
     if all_freq.has_key(note):
