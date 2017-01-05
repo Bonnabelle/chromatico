@@ -29,7 +29,7 @@ class SignupQuizHandler(Utilities):
             self.redirect("/homepage")
 
         options = getTextOption(1)
-        answer = getAnswer(options)
+        answer = getAnswer(options, 0)
         audio = getAudio(answer)
         t = jinja_env.get_template("squiz.html")
         response = t.render(op1=options[0],op2=options[1],op3=options[2],op4=options[3], counter=counter,audio=audio)
