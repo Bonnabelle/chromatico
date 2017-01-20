@@ -101,10 +101,7 @@ KEY:
 		video you found on youtube today with the music of 3.14
        		  - Add the pretty colors for the correct pages
         		    - FONTS! ALL THE FONTS!!!!
-               	   - Piece together your presentation and life
-
-		        What else could possibly go wrong?
-                                   
+               	        - Piece together your presentation
 
 10:00 AM - 6:02 PM 11/21/16
     * Been working on fixing the database problem all day. Went to the mentor center help session (how convenient, the only one I can attend) learned more about ORM and such. GQL might not be able
