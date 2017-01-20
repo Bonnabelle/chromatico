@@ -1,0 +1,301 @@
+CHROMATICO CHANGELOG:
+
+KEY:
+// - Comments like this are taken from the perspective of myself after I finished the original features for the project.
+* - Mark something done
+~ Mark ideas and personal TODO's
+
+// This is a changelog I kept throughout the entire time I coded on this project as a reference to what I had implemented and changed. It was useful when I made an error so I 
+   could have a personal stacktrace of what I had previously done and it was useful when I had learned something new- it let me track my progress and compare thought patterns from then
+   and now. It belongs to this project, and I believe it is a good showcase of advances not only in the project, but also in myself as a developer. Some final statistics for the project
+   can be found at the bottom of this log.
+
+12:48 PM 11/11/2016
+    * Officially started final project
+    * Created quiz generation functions
+    * Created beta test for final project, implemented database models for user signup/login/logout and
+      two different homepages for a logged in user vs. a logged user/non-existent user.
+
+10:00 AM - 4:58 PM 11/12/16
+    * Attempted to organize by using a structure of circular dependencies for working tree, cluttered things.
+    * Researched the physics behind tone comprehension and its relationship with music.
+    * Created a resources page for all the references I'm using in the making of this project.
+    * Created TODO's for myself in the top level file, main.py.
+    * Initialized the files on my computer as github repository.
+    * Fixed the untracked file problem with /static and /handlers.
+    * Created README.md for Github.
+
+9:00 AM - 12:00 PM 11/13/16
+    * Fixed the circular dependency problem with new file setup.
+    * Tried a cookie method idea for quizzes.
+    * Attempted to fix css.
+
+3:30 PM - 7:45 PM 11/14/16
+    * Implemented the page the user redirects to after signup, about to start the quiz.
+    * Implemented the structure of quiz functions.
+    * Fixed css with help of Joe.
+    * Finally got the quizzes' counters to start counting, and the user's submissions to actually be recorded to the "correct" variable.
+
+9:04 AM  - 6:00 PM 11/15/2016
+    * Fixed the comparison of the answer variable and what the user submitted in the SignupQuizHandler. 9:04 AM - 12:30 PM
+    * Fixed the global variable problem with the current_user, completed, etc. variables 3:30 PM - 4:24 PM
+    * Simplified some code in the main.py and base.py 4:30-4:42 PM
+    * Debugged and tested the global variables to ensure working order, everything passed 5:00 PM
+    * GQL query for the current user's statistics broke. Need to fix it. 5:18 PM
+    * Fixed the GQL problem, wasn't declaring some variables correctly and mispelled some stuff. 5:45 PM
+    * Tested signup quiz functionality, passed. Now to the profiles. 6:00 PM
+				
+				  ~TOMORROW'S TODOS~
+	- Create the profile with statistics, options and user comments (maybe)
+	- Work on audio files for the quiz, make sure to add resources in /resources
+			- Start adding CSS and other graphics
+	- If there is still time/inspiration start working on training
+
+10:05 AM - 9:22 PM 11/16/16
+    * Started implementation of profiles 10:09 AM
+    * Realized that current_user could just be self.user - I'm checking to see if the username exists.
+      If it exists, that means the user must be logged in/signed up. 10:20 AM
+    * Started connecting the dots between the string substitution across the board for the profile webbapp route. 10:29 AM
+    * Broke everything with the routes 10:30 AM
+    * Reverted changes 10:35 AM
+    * The profiles don't work because somewhere the code isn't linking current_user to self.user so I'm trying to fix that by making
+      current_user and current_user_stats available from the top level of the code, base.py 10:30 AM - 11:02 AM
+    * PROBLEMS I'M HAVING: I'm only initializing the current_user variable when someone signs up, but not when they log in. I need the
+      current_user variable to update also when a user logs in. Maybe I can try and implement that at the top level again. 11:09 AM
+     
+    // Here I was trying to create user statistics. When a user finished their quizzing, I wanted them to have access to some simple data of those stats. I had a variable called
+       self.user which held the current user logged in. I was trying to create another variable that did something similar, but held the statistics instead. Below I run into more problems
+       and I only come to fix it when I went to the Mentor Center and got some fresh eyes.
+
+    * Getting the NoneType problem again with current_user. Utilities.login_user is not updating the variables correctly. 11:18 AM
+
+    // It was NoneType because the user stats didn't exist. I was trying to access a non-existant variable which held a non-existant database model.
+
+    * Replaced every reference to self.user with a new variable, current_user. Fixed some of the problem, but broke login in the process. 12:01 PM
+    * Fixed most everything with  little research on instance variables vs. class variables in python, initialized current_user and
+      current_user_Stats as self.current_user_stats,
+      to make them instance variables. Only broke the homepage. 12:17 PM
+    * Figured out the problem is that I'm trying to access the user's statistics, but since they don't really exist yet, it's not possible
+      to get them. Therefore they are unicode objects, giving me a NoneType error. 12:23 PM
+    * Made a unicode type conditional so if the user doesn't exist, nobody gets internal server errors. 12:31 PM
+    * Realized unicode conditional doesn't work and that was a poor solution. Deleted. 1:00 PM
+    * Slowly started fixing the whole self.user problem 1:10 PM
+    * Fixed everything except for adding the correct statistics to the user after they complete the signup quiz, which also means they can retake that quiz over and over again. 3:55 PM
+    * I need a break; moving on to css for now. 4:32 PM
+    * Started researching about the problem with the <audio> tag in HTML. 4:46 PM 
+
+    // What I meant here is that the <audio> tag wasn't allowing the user to play audio. The MP3 file showed up in the HTML and the player was there, but everything was grayed out.  
+       I understood why it did this at a later time.
+
+    * After my computer bluescreened, I had too many issues trying to implement the src of the audio in local directories. Started researching how to use links for audio files. 4:48 PM
+    * Figured out how to fix the audio tag and use online links to mp3 files. Working towards frequency/note relationships. 5:20 PM
+    * Started conversion of 12 common frequencies (261.63 Middle C - 493.88 B) 5:40 PM
+    * Successfully implemented 12 frequencies, with the majors and minors as options as well. 6:25 PM
+    * Beginning work on the signup once more. If I can't do anything by 8:00 PM, I will begin work on the css and styling. 6:27 PM
+    * Working on CSS and javascript menu things. 7:00 PM - 7:43 PM
+    * Implemented lovely animated side navigation bar, all color-coordinated as planned. Added some padding and more color to <h1> tags. Implementing more CSS after 9:00 PM tonight. 8:45 PM
+    * Implemented some more css animations/colors/etc. 9:22 PM
+    
+				~TOMORROW'S TODOS~
+	- MORE CSS!!!!!! Actually write the homepage's screen, and show that 
+		video you found on youtube today with the music of 3.14
+       		  - Add the pretty colors for the correct pages
+        		    - FONTS! ALL THE FONTS!!!!
+               	   - Piece together your presentation and life
+
+		        What else could possibly go wrong?
+                                   
+
+10:00 AM - 6:02 PM 11/21/16
+    * Been working on fixing the database problem all day. Went to the mentor center help session (how convenient, the only one I can attend) learned more about ORM and such. GQL might not be able
+      to update keys? I don't believe it, but maybe...
+    * Attempting more debugging 6:04 PM
+    * Somehow fixed the statistics from updating, but in the process created a new bug- a new entity is created every time when statistics are updated. 6:28 PM
+    * Trying more debugging things, still nothing much happening. 6:42 PM
+    * I'm screwed 7:04 PM
+    * Chris came over to help, here is what I need to do:
+              - Create a UserStats REFERENCE PROPERTY in the User model, so you don't even have to create a new UserStats model. The self.current_user
+                variable has access to user stats automatically when it's created, since self.current_user hold the user model (which holds the stats model).
+              - Gotta figure out how to initialize it correctly, however.
+    * Figured out how to make it stop creating more instances in the database by using reference property. Working on fixing the stats to display
+      and the usename greeting thing to work. 7:43 PM
+    * Dug myself deeper into a hole of confusion. I need to stop and sleep. 8:19 PM
+    * If worse comes to worse, revert code back to previous commit and try something else. 8:20 PM
+
+12:49 PM - 1:29 PM 11/22/16
+    * Starting working on piecing together what Chris said last night. 12:50 PM
+    * FIGURED IT OUT AND FIXED IT!!!!! 1:30 PM
+    * Took small break to listen to some Hamilton favorites, and writing notes in code that explain some things. 1:32 PM - 1:54 PM
+    
+    // Ended up coding on codewars after this.
+
+4:04 PM (Is that foreshadowing? Probably :I) - 5:02 PM 11/26/16
+    * Resumed work on project. 4:04 PM
+    * Attempting to implement user quizzes for training. Uses same algorithm as the signup quiz, adding to their points and percentage correct. 4:16 PM
+    * Implementing quizzes, came across error with redirecting back to homepage after every question. I believe it has something to do with the self.current_user.taken_assess = True. 4:25 PM
+    * Figured out by using the same HTML template as the signup quiz, every action was directing itself to the /squiz url, not the /quiz. Therefore, the code for the signup quiz was being used instead of the code just for quizzing. 4:26 PM
+    * Implemented quizzing with a minor bug - The percentage correct needs to be a list variable in the database so you can accurately calculate percent. 4:30 PM
+    * I would like to make it possible to customize quizzes with the following choices: 
+~ 1. Make it possible for a user to choose how many questions they do, and then assign points based on the questions answered
+~ 2. Make it possible for a user to choose what type of sound they want to hear - piano or tone.
+~ 3. Make it possible for a user to choose what type of questions they want: multiple choice with note names, find it on the piano, multiple choice with audio or a randomized all of the above.
+    
+				~ TODO'S BEFORE WEDNESDAY ~
+		      ~ All of the listed quiz customization options
+	    ~ Fix the bugs with the quizzes showing the same notes as options
+			   ~ User profiles, with dynamic urls 
+			 ~ Fill up some whitespace on each page
+	~ Make it possible for the color of the sidebar to change on each different page
+			~ Implement the rewards/sticker system
+	      ~ Make a practice page with information/minigames on the tones
+	  ~ Add all the final CSS, JS and graphics to make it look pretty pretty!!
+
+9:45 AM - 12:30 PM 11/28/16
+    * Cleaned up .pyc files and removed them from local git 10:25 AM
+
+    // I had been having problems with the system writing bytecode, but in the time it took me to learn how to efficiently clean them out, I learned so much more about Github commands.
+
+    * Tried to fix the notes appearing multiple times in the same list, but my mind is too foggy to really fix it right now. 10:30-11:00 AM
+    * Moving on to quiz customizing 11:01 AM
+    * Made it possible for a user to choose how many questions they want to answer, plus fixed the .pyc problem. (For now...) 11:49 AM
+
+8:44 AM - 11/29/16
+    * Going to try and implement the rest of the TODO's today. Starting from the top. 8:46 AM
+    * Ended up trying to fix the global variable problem, created more problems in the proccess. I want to be able to access them from
+      from a class inside the quiz.py instead of base.py. I guess I could put the variables I need in there, but it's frustrating.
+      For now, I will put the variables there. 9:49 AM
+    * Got the page to show up, but now the counter won't count. Lovely. 9:52 AM
+    * Ended up doing practice stuff on codewars. 10:00-10:32 AM
+    * I need to eat and rest, my head hurts something awful, but I'm pushing through. Will be back after a bite. GOING TO IMPLEMENT THOSE PROFILES!!! 11:23 AM
+    * But seriously though, there HAS to be a better way to reference those global variables in only one place. I'm worried about "bad code design". 11:35 AM
+    * Found a huge bug with the select tag for question numbers- was returning a unicode list as the maximum qnum allowed. Unicode != Integer. Type conversion fixed that. 11:40 AM - 12:00 PM
+    * Okay, NOW I can go get lunch. 12:01 PM
+    * Started implementing audio options and random options. Will work on the piano when I have more time. Current bugs: 
+~ 1. The correct variable is a problem - I need to show the results on the next page, and they work 90% of the time, but the again they don't. It's a problem with resetting the variable after the results are shown.
+     I can only seem to reset it WHILE they're being shown.
+~ 2. Profiles still don't work.
+~ 3. Haven't finished the rest of the quiz features.
+~ 4. The sidebar changing color depending on page is a much more complicated task than one would think.  1:11 PM - 4:00 PM
+
+				~ TODO'S FOR AFTER TOMORROW ~
+				   ~ Fix the above bugs
+			    ~ Implement the rest of the things
+					~ PROFILES
+
+11:30 AM - 7:32 PM 12/14/16 - Returned from Florida
+    * Cappuccino died sometime last night, woke up to find him curled in his sleeping position, not breathing. RIP my little buddy, you were 
+      my furry best friend. 11:47 AM
+    * My mood is kind of ruined today so I'm going to do my best. Finally got my ASUS charger back so back to work on the project, woohoo.
+      Working on profiles. 11:48 AM
+    * I can't seem to do anything. I tried to fix the profiles but still no luck, getting the 404 error. 12:40 PM
+    
+    // I had a few things written here, but all I was doing was making silly small errors. It felt like a for loop of sadness.
+
+    * Finally fixed percentage calculation. 2:39 PM
+    * Added more to the resources page depending on level. 3:17 PM
+    * Starting work on study page, need to get some up and running for tomorrow. 3:28 PM
+    ~ TOOK BREAK 3:30-6:00 PM ~ // More like nap
+    * Resumed work on the study page, I need to finish something. 6:13 PM
+    * Switched focus from study pages to options page for each user. I can code that fairly quickly but those are cool new features. 6:25 PM
+    * Implemented options page with the ability to delete account, change username and email. Working on passwords. 7:28 PM
+
+5:17 PM - 8:00 PM 12/22/16
+    * Went to the HappyHire event. Working on implementing the 
+      study pages as well as the different quiz options. (hopefully) 5:18 PM
+    * Realized there are tons of bugs with quizzes, working to fix. 5:48 PM
+    * Fixed the quiz problems, but will have to deal with there being a question 0. I'll use it as a CS inside joke. Moving on to the Study pages. 6:00 PM
+    * In the process of designing how the pages would look I found myself jamming to a Trap remix of the F.U.N song from Spongebob. It improved my productivity. Implementing major keys. 6:20 PM
+    * Followed online CSS tutorial and implemented/edited final product for CSS piano. 7:48 PM
+    * Implemented killer css piano. The links currently lead to an offsite resource for more information about the notes, but will work on actual notes later. 8:12 PM
+    * Beginning practice problems on Hackerrank and code wars. signing off for the day, need some rest. 8:16 PM
+    
+9:48 AM - 6:44 PM 12/24/16
+    * Spent most of the day figuring out how to deploy app on Google App Engine. It wasn't as easy as everyone told me it was. 
+      Ended up using a hybrid of the command line (with gcloud tools and documentation) and the actual software itself. 10:00 AM - 12:30 PM, 1:00 PM - 3:00 PM
+
+    // In time I came to understand a lot about the Google Cloud platform and went on to make a short and simple tutorial about how to host your python apps with GAE, found
+       at the url of: memed-tutorial.appspot.com
+
+    * Testing to make sure the site updates itself when I make a change. 3:01 PM 
+    * Success!! Each time I update the code I have to re-deploy, but that's simple. 3:05 PM
+    * Staged changes on Github. Figured out a more efficient way to clean directory of unused/deleted/untracked files. Thanks documentation! 3:14 PM
+    * Taking small break. 3:16-3:30 PM
+    * Figuring out some small features and debugging. 3:30-4:00 PM
+    * Trying to implement counter for total visits and total users, but it's buggy. May have come up ith a solution to the global variable problem however. 
+      I can create the variables in the base.py file and initialize them as self.options = options, etc. the way an __init__ function should work. 5:35 PM
+    * Fixed the quiz bugs and implemented a cool looking icon and nice logo on the homepage when you're not logged in. 
+
+			~ FEATURES TO ADD ~
+	    ~ The audio and random features for quizzes
+	  ~ Try to get rid of global variables altogether
+	~ An updates log on the homepage from the dev (moi)
+			~ The about page
+			~ More graphics
+	~ Some form of chat on the rewards page? Make sure to have options to delete messages (sent by you) or report abuse.
+
+10:34 AM - 4:47 PM 12/26/16
+    * Working on the above features today. If I can finish those I think I can say I'm "done" with my project! Starting work on the global variables. 10:35 AM
+    * My theory for the global variables works, which is great, but I broke the correct counter in the process. Debugging. 10:53 AM
+    * After googling some things and using the code visualizer on pythontutor.com, I realized I've been trying to increment an instance method. You can't do that- you'll get a type error. Researching some more. 11:13 AM
+     
+    // This is why my solution by using self.options would never work. You can't increment instance methods.
+
+    * Honestly, everything else works, so I'm going to leave the integers alone for now, until I find a better solution. 11:53 AM
+    * Fixed counter, trying to fix correct. 12:06 PM     // Those were variable names
+    * Added another global variable just for debugging. Compared what was entered to the correct answer, and that test passed. The correct variable isn't counting. 12:09 PM
+    * Did some more debugging. The counter variable is working, but it's the comparison between the instance and the string that's throwing stuff off. I'm going to try type conversion. 12:22 PM
+    * Somewhere in the code what's getting submitted isn't equal to the answer. It may be because one is an instance variable and the other is local. Will keep trying. Getting some lunch. 12:26 PM
+    * Back from lunch. 1:00 PM
+    * Reverted changes. There isn't a simpler way to do this (that I know of) at this time. 1:14 PM
+    * Moving on for now.
+    * Unhappily reverted changes to regular quizzes, reverting changes for signup quizzes. Going to figure out a way to implement the visits and users variable. 1:22 PM
+    * Learned about sets in Python. No more duplicate options in quizzes, yay!! 2:03 PM
+    * Cleaned up quiz generations as much as possible all around the board; looks a bit nicer!!! 2:15 PM
+    * Fixed some bugs that happened everywhere in the code after implementing sets, all is well for now. Moving on to the users/visits counter. 2:21 PM
+    * In order to get some cool site statistics like I want (without having to pay for premium Google Cloud services) I'm going to have to make another DB model. Implemented total users. 3:29 PM
+    * Decided to add a comments section of sorts to the rewards page. 3:40 PM
+    * Implemented rough commenting system and worked out some more bugs. 4:28 PM
+
+			~ TODO'S FOR WEDNESDAY ~
+		~ Implement the other quiz options.
+		~ Keep trying new things with those variables, but if you can't think of anything else, it works, so leave it be.
+		~ Separate the comments into pages- one for making them, possibly one for editing them, and the other for deleting them. Try and come up with a better way to do this.
+	      ~ The about page, and maybe the key info pages.
+			~ A few more graphics.
+	~ Keep the WIP idea as a WIP, but other than that, YOU'RE DONE!! :D
+
+9:11 PM - 11:05 PM 12/26/16
+    * So I decided to come back and code some more. I'm finishing school this week and don't have much time on my plate to fool around with my project, so ultimate goal is to finish it asap. Going to work 
+      on less mentally-taxing things (and less room for error-prone code due to lack of energy) like the quiz options and comment pages, then calling it a night. 9:12 PM
+    * Beginning work on swapping the text/audio Q's. Keep losing internet. Going to have to do this offline. 9:15 PM
+    * Cleaned up some repetitive code and paved the way for more customizable options. I really dislike these global variables though. 9:33 PM
+    * Got the generation algorithm to work, but now the audio won't play again. Ugh. 10:02 PM
+    * FOUND THE PROBLEM- According to Google Developer Tools: "GET https://raw.githubusercontent.com/Bonnabelle/chromatico/master/chromatico/sounds/440.mp3 net::ERR_INTERNET_DISCONNECTED". *Slow clap* 10:06 PM
+    * Well I know it works, so I'm okay with this for now. Polishing the code. 10:06 PM
+    * Got both audio and text generation down. Random works too, but it's rough. 10:43 PM
+    * New bug: ...Wait. Oh for crying out loud. Internet problems again. The audio kept showing up as the raw URL itself, but that was just an error on the wifi's end. Everything's fine. Quiz generation is done!!!!! (for frequencies, anyway) 10:58 PM
+    * Finished debugging. Everything is up and running for quizzes on every level, no errors. I'll work on fixing the global variables later. For now, updating the site and signing off. 11:05 PM
+     
+     // I tested it the next morning and everything worked perfect.
+
+
+TOTAL DAYS SPENT ON THIS PROJECT(Completing original features, running on schedule that relies on circumstance):
+17
+
+HOURS SPENT ON FINISHING ALL THIS (Basics, about 4 fun features.):
+70
+
+DAYS SPENT ON PROJECT (Total hours / 24, completing original features):
+2.91
+
+ESTIMATION OF HOW MANY MORE HOURS WILL BE DEVOTED:
+20
+
+IDEAS IN DEVELOPMENT:
+~ An about page
+~ Better comment system
+~ More Javascript, making it interactive
+~ A playable piano, made by me
+~ Buttons to play the frequency of the tone on the study page.
+
+After these, I will move on to a Spring MVC project, and do general maintenance and maybe style updates when I learn more JS and other design skills.
