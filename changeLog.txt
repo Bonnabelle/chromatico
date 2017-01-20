@@ -279,7 +279,7 @@ KEY:
 TOTAL DAYS SPENT ON THIS PROJECT(Completing original features, running on schedule that relies on circumstance):
 17
 
-HOURS SPENT ON FINISHING ALL THIS (Basics, about 4 fun features.):
+HOURS SPENT ON FINISHING ALL ORIGINAL CONCEPTS, FUNCTIONALITY AND FEATURES:
 70
 
 DAYS SPENT ON PROJECT (Total hours / 24, completing original features):
