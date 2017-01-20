@@ -4,4 +4,4 @@ This is a website where users can train their ears in order to develop better to
 
 The title is a reference to the Chromatic scale on which all 12 of music's pitches lie.
 
-# changeLog.txt has been included with the source code; all changes and comments were logged there.
+changeLog.txt has been included with the source code; all changes and comments were logged there.
