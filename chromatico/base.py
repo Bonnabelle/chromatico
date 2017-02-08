@@ -55,8 +55,10 @@ class Utilities(webapp2.RequestHandler):
             i += 1
         return i
 
-    def get_comments(self):
-        pass
+    def get_comments(self,author):
+        comments = db.GqlQuery("SELECT * FROM Comments WHERE author = '%s'" % author)
+        if comments:
+            return comments
 
     def login_user(self, user):
         user_id = user.key().id()

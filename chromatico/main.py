@@ -129,6 +129,16 @@ class LogoutHandler(Utilities):
 """class AboutHandler(Utilities):
 """
 
+class ProfileHandler(Utilities):
+    def get(self,username):
+        if username:
+            t = jinja_env.get_template("profile.html")
+            response = t.render(user = self.get_user_info(username))
+            self.response.write(response)
+        else:
+            self.redirect("/homepage")
+
+
 class OptionsHandler(Utilities):
     def get(self):
         t = jinja_env.get_template("options.html")
@@ -154,8 +164,6 @@ class OptionsHandler(Utilities):
         self.current_user.put()
         self.redirect("/homepage")
 
-        #self.redirect("/homepage")
-
 
 class ExterminateHandler(Utilities):
     def get(self):
@@ -167,7 +175,6 @@ class ExterminateHandler(Utilities):
         self.current_user.delete()
         self.users -= 1
         self.redirect("/logout")
-
 
 
 class StudyHandler(Utilities):
@@ -188,12 +195,26 @@ class GameHandler(Utilities):
         content = self.request.get("content")
 
         if content:
-            # create a new Post object and store it in the database
+            # create a new comment object and store it in the database
             author = self.current_user
             comment = Comment(content=content,author=author)
             comment.put()
 
             self.redirect("/rewards")
+
+
+class DeleteCommentHandler(Utilities):
+    def get(self,cid):
+         t = jinja_env.get_template("delete-c.html")
+         response = t.render(c = Comment.get_by_id(int(cid)))
+         self.response.write(response)
+
+    def post(self,cid):
+
+        Comment.get_by_id(int(cid)).delete()
+
+        self.redirect("/rewards")
+
 
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
@@ -204,13 +225,14 @@ app = webapp2.WSGIApplication([
     ('/signupq', quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
+    webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}>',ProfileHandler),
     ('/options', OptionsHandler),
     ('/delete', ExterminateHandler),
     ('/results', quiz.ResultsHandler),
     ('/custom-q', quiz.QuizCustomizerHandler),
     ('/quiz', quiz.QuizHandler),
     ('/study', StudyHandler),
-    ('/rewards', GameHandler)
-    #webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}/profile', ProfileHandler)
+    ('/rewards', GameHandler),
+    webapp2.Route('/delete/<cid:\d+>', DeleteCommentHandler)
 
 ], debug=True)

@@ -1,0 +1,22 @@
+{% extends "spawn.html" %}
+{% block content %}
+<h2> Welcome to {{ user.username }}'s profile!</h2>
+<h3>Current statistics:</h3>
+    <p>Quizzes complete: {{ user.stats.quizzes_complete }}</p>
+    <p>Past scores:
+        {% for i in user.stats.percentages %}
+        |{{ i }}|
+        {% endfor %}
+    </p>
+    <p>Average percentage correct: {{ percent }}%</p>
+    <p>Total points: {{ user.stats.points }}</p>
+    <p>Current Level: {{ user.level }}</p>
+
+<a href="/rewards">
+    <button class="button">Back to rewards</button>
+</a>
+
+<br>
+<br>
+
+{% endblock %}

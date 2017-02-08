@@ -276,6 +276,9 @@ KEY:
      // I tested it the next morning and everything worked perfect.
 
 
+
+~~~ STATS THUS FAR ~~~
+
 TOTAL DAYS SPENT ON THIS PROJECT(Completing original features, running on schedule that relies on circumstance):
 17
 
@@ -296,3 +299,13 @@ IDEAS IN DEVELOPMENT:
 ~ Buttons to play the frequency of the tone on the study page.
 
 After these, I will move on to a Spring MVC project, and do general maintenance and maybe style updates when I learn more JS and other design skills.
+
+
+
+
+9:30 AM - 10:00 AM 2/8/17
+    * Decided to do add a few things to this project today, needed a break from Spring. 9:32 AM
+    * Implemented profiles! For now it's only statistics, but eventually I want users to be able to upvote someone for their hard work or something. It works for 
+      comparison, anyways. 9:50 AM
+    * Added in a delete system for comments if the OP wants to delete one of their own. 10:00 AM
+    

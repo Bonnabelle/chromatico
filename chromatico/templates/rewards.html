@@ -17,25 +17,29 @@
 {% endif %}
 
 {% if current_user.level == 2 %}
-<iframe src="http://www.freeonlinegames.com/embed/21645" width="640" height="480" frameborder="no" scrolling="no"></iframe>
+<div align="center">
+    <iframe src="http://www.freeonlinegames.com/embed/21645" width="640" height="480" frameborder="no" scrolling="no"></iframe>
+</div>
 {% endif %}
 
 {% if current_user.level == 3 %}
-<p>Congratulations on getting to level 3!!
-   You've worked hard to get here, so enjoy these games specially selected for level 3 users.</p>
-   <br>
-   1. Dream Symphony
-   <br>
-   <embed width="640" height="480" base="http://external.kongregate-games.com/gamez/0015/5848/live/" src="http://external.kongregate-games.com/gamez/0015/5848/live/embeddable_155848.swf" type="application/x-shockwave-flash"></embed>
-   <br>
-   2. Ducklife 3: Evolution (This one is pretty addicting)
-   <br>
-   <embed width="750" height="480" base="http://external.kongregate-games.com/gamez/0011/2133/live/" src="http://external.kongregate-games.com/gamez/0011/2133/live/embeddable_112133.swf" type="application/x-shockwave-flash"></embed>
-   <br>
-   3. Continuity
-   <br>
-   <embed width="640" height="480" base="http://external.kongregate-games.com/gamez/0007/3515/live/" src="http://external.kongregate-games.com/gamez/0007/3515/live/embeddable_73515.swf" type="application/x-shockwave-flash"></embed>
-   <br>
+<div align="center">
+    <p>Congratulations on getting to level 3!!
+        You've worked hard to get here, so enjoy these games specially selected for level 3 users.</p>
+    <br>
+        1. Dream Symphony
+    <br>
+        <embed width="640" height="480" base="http://external.kongregate-games.com/gamez/0015/5848/live/" src="http://external.kongregate-games.com/gamez/0015/5848/live/embeddable_155848.swf" type="application/x-shockwave-flash"></embed>
+    <br>
+        2. Ducklife 3: Evolution (This one is pretty addicting)
+    <br>
+        <embed width="750" height="480" base="http://external.kongregate-games.com/gamez/0011/2133/live/" src="http://external.kongregate-games.com/gamez/0011/2133/live/embeddable_112133.swf" type="application/x-shockwave-flash"></embed>
+    <br>
+        3. Continuity
+    <br>
+        <embed width="640" height="480" base="http://external.kongregate-games.com/gamez/0007/3515/live/" src="http://external.kongregate-games.com/gamez/0007/3515/live/embeddable_73515.swf" type="application/x-shockwave-flash"></embed>
+    <br>
+ </div>
 {% endif %}
 
 <div align="center">
@@ -52,7 +56,9 @@
         {% for c in comments %}
             <div class="comment">
                 <p>{{ c.content }}</p>
-                <h6>Written by {{ c.author.username }} on {{ c.created.strftime('%Y-%m-%d') }}.</h6>
+                <h6>Written by <a href="/{{ c.author.username }}">{{ c.author.username }}</a> on {{ c.created.strftime('%Y-%m-%d') }}. {% if current_user.username == c.author.username %}
+                    <a href="/delete/{{ c.key().id() }}">Delete</a>
+                {% endif %}</h6>
             </div>
         {% endfor %}
     </div>
