@@ -1,0 +1,22 @@
+{% extends "spawn.html" %}
+{% block content %}
+
+<h3>Edit your comment below!</h3>
+
+<h4>Original:</h4>
+<div class="comment">
+    <p>{{ c.content }}</p>
+</div>
+
+<br>
+<br>
+
+<h4>New:</h4>
+
+<form method="post">
+    <textarea rows="4" cols="35" name="new_content">{{ c.content }}</textarea>
+    <input type="submit">
+</form>
+
+
+{% endblock %}
