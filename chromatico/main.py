@@ -216,6 +216,21 @@ class DeleteCommentHandler(Utilities):
         self.redirect("/rewards")
 
 
+class EditCommentHandler(Utilities):
+    def get(self,cid):
+        t = jinja_env.get_template("edit-c.html")
+        self.response.write(t.render(c = Comment.get_by_id(int(cid))))
+
+    def post(self,cid):
+        c = Comment.get_by_id(int(cid))
+        new_cont = self.request.get("new_content")
+
+        c.content = new_cont
+        c.put()
+
+        self.redirect("/rewards")
+
+
 app = webapp2.WSGIApplication([
     ('/',IndexHandler),
     ('/homepage', HomepageHandler),
@@ -225,7 +240,7 @@ app = webapp2.WSGIApplication([
     ('/signupq', quiz.SignupQuizHandler), #Signup quiz handler
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
-    webapp2.Route('/<username:[a-zA-Z0-9_-]{8,20}>',ProfileHandler),
+    webapp2.Route('/profile/<username:[a-zA-Z0-9_-]{8,20}>',ProfileHandler),
     ('/options', OptionsHandler),
     ('/delete', ExterminateHandler),
     ('/results', quiz.ResultsHandler),
@@ -233,6 +248,7 @@ app = webapp2.WSGIApplication([
     ('/quiz', quiz.QuizHandler),
     ('/study', StudyHandler),
     ('/rewards', GameHandler),
-    webapp2.Route('/delete/<cid:\d+>', DeleteCommentHandler)
+    webapp2.Route('/delete/<cid:\d+>', DeleteCommentHandler),
+    webapp2.Route('/edit-c/<cid:\d+>',EditCommentHandler)
 
 ], debug=True)

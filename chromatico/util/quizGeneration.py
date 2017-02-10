@@ -86,9 +86,15 @@ def getAudioOption(level):
 
     return list(options)
 
+
+def getPianoOption(level):
+    return getTextOption(level) # In the end, they need the same thing. In random, the getRandomOption determines type.
+
 def getRandomOption(level,boo):
     if boo == 1:
         return getAudioOption(level)
+    elif boo == 2:
+        return getPianoOption(level)
     return getTextOption(level)
 
 #Chooses a note to be the answer out of the options list

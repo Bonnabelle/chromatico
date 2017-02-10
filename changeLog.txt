@@ -308,4 +308,12 @@ After these, I will move on to a Spring MVC project, and do general maintenance 
     * Implemented profiles! For now it's only statistics, but eventually I want users to be able to upvote someone for their hard work or something. It works for 
       comparison, anyways. 9:50 AM
     * Added in a delete system for comments if the OP wants to delete one of their own. 10:00 AM
+
+4:26 PM - 2/9/17
+    * On my way to Tenessee, decided to code to pass some time. Discovered huge error on my part with the /custom-q url.
+      Apprently, since custom-q is longer than 8 characters and is composed of only alphanumeric letters, it qualifies as a username.
+      It was being confused for a profile, as the profile url is just chromatico/username. So, I added an extra parameter to the profile url. 4:30 - 5:00 PM
+    * Made it possible for users to edit their comments. 5:06 PM
+    * Attempting to add the final feature (or at least the one I can develop offline) to the quizzes - Piano additions. 5:07 PM
+    * Battery is getting low and the car charger died. Putting this as WIP until I get back to a power outlet. 5:31 PM
     

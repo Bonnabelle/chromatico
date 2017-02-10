@@ -1,11 +1,11 @@
 {% extends "spawn.html" %}
 {% block content %}
 <h2> Welcome to {{ user.username }}'s profile!</h2>
-<h3>Current statistics:</h3>
-    <p>Quizzes complete: {{ user.stats.quizzes_complete }}</p>
-    <p>Past scores:
+    <h3>Current statistics:</h3>
+        <p>Quizzes complete: {{ user.stats.quizzes_complete }}</p>
+        <p>Past scores:
         {% for i in user.stats.percentages %}
-        |{{ i }}|
+            |{{ i }}|
         {% endfor %}
     </p>
     <!--<p>Average percentage correct: {{ percent }}%</p>-->

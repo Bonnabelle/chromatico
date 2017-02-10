@@ -52,8 +52,8 @@
         {% for c in comments %}
             <div class="comment">
                 <p>{{ c.content }}</p>
-                <h6>Written by <a href="/{{ c.author.username }}">{{ c.author.username }}</a> on {{ c.created.strftime('%Y-%m-%d') }}. {% if current_user.username == c.author.username %}
-                    <a href="/delete/{{ c.key().id() }}">Delete</a>
+                <h6>Written by <a href="/profile/{{ c.author.username }}">{{ c.author.username }}</a> on {{ c.created.strftime('%Y-%m-%d') }}. {% if current_user.username == c.author.username %}
+                    <a href="/edit-c/{{ c.key().id() }}">Edit</a>   <a href="/delete/{{ c.key().id() }}">Delete</a>
                 {% endif %}</h6>
             </div>
         {% endfor %}

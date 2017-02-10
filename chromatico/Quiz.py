@@ -1,3 +1,4 @@
+
 from base import *
 from util.quizGeneration import *
 
@@ -81,11 +82,8 @@ class SignupQuizHandler(Utilities):
             self.current_user.stats.put() #Updates all the data in the database
 
             self.redirect("/results")
-            #self.redirect("/%s/profile" % self.current_user.username)
 
 class QuizCustomizerHandler(Utilities):
-    #TODO: Implement this class/webpage that allows a user to choose how many questions they want to do,
-    # What type of questions wil be in their quiz, and then pass those on to the quizHandler to generate a quiz
     def get(self):
         t = jinja_env.get_template("qcustomize.html")
         response = t.render()
@@ -120,6 +118,9 @@ class QuizHandler(Utilities):
         elif typ == "Audio":
             options = getAudioOption(self.current_user.level)
             answer = getAnswer(options,"Audio")
+        elif typ == "Piano":
+            options = getTextOption(self.current_user.level)
+            answer = getAnswer(options, "Text")
         elif typ == "Random":
             boo = random.randrange(0,2)
             options = getRandomOption(self.current_user.level, boo)
@@ -128,7 +129,7 @@ class QuizHandler(Utilities):
                 audio = answer
 
         t = jinja_env.get_template("quiz.html")
-        response = t.render(options=options, counter=counter,note=answer,audio=audio)
+        response = t.render(options=options, counter=counter,note=answer,audio=audio, typ=typ)
         self.response.write(response)
 
     def post(self):
@@ -175,8 +176,6 @@ class QuizHandler(Utilities):
 
             self.current_user.stats.put()
             self.redirect("/results")
-            #TODO: Make this work.
-            #self.redirect("/%s/profile" % self.current_user.username)
 
 
 class ResultsHandler(Utilities):

@@ -1,10 +1,9 @@
 {% extends "spawn.html" %}
 {% block content %}
 
-<!--TODO: Make all the question type conditionals, as well as the make a for loops counting options according to level.-->
 <p>Question {{ counter }}.</p>
 {% if audio == "" %}
-    <p> Select the audio below that belongs to {{ note }}.</p>
+    <p> Select the audio (or piano key, if applicable) below that belongs to {{ note }}.</p>
 {% else %}
     <p> Identify the note as heard in the audio below.</p>
         <audio controls>
@@ -14,21 +13,25 @@
 {% endif %}
 
 <form method="post" action="/quiz">
-    {% for op in options %}
-        {% if "https" in op %}
-        <br>
-            <input type="radio" name="option" value="{{ op }}">
-                <audio controls>
-                    <source src="{{ op }}" type="audio/mp3">
-                        There was an error loading the audio.
-                    </audio>
-            </input>
+    {% if typ == Piano %}
+        <!--Condensed piano, in a form-->
+    {% else %}
+        {% for op in options %}
+            {% if "https" in op %}
             <br>
-        {% else %}
-            <input type="radio" name="option" value="{{ op }}">{{ op }}
-            <br>
-        {% endif %}
-    {% endfor %}
+                <input type="radio" name="option" value="{{ op }}">
+                    <audio controls>
+                        <source src="{{ op }}" type="audio/mp3">
+                            There was an error loading the audio.
+                        </audio>
+                </input>
+                <br>
+            {% else %}
+                <input type="radio" name="option" value="{{ op }}">{{ op }}
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 <input type="submit">
 </form>
 <br>
